@@ -95,8 +95,6 @@ public static void Example()
         }
     };
 
-    serializer.Serialize(Console.Out, bar);
-
     /*
         Output XML:
         <bar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="1">
@@ -107,10 +105,13 @@ public static void Example()
             </numbers>
         </bar>
     */
+
+    serializer.Serialize(Console.Out, bar);
 }
 ```
 
 License
 -------
+Copyright (c) 2015 NetBike
 
-[MIT License](https://github.com/netbike/netbike.xml/blob/master/LICENSE)
+The [MIT License](https://github.com/netbike/netbike.xml/blob/master/LICENSE)
