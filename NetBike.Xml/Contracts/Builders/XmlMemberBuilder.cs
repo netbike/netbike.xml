@@ -1,0 +1,23 @@
+﻿namespace NetBike.Xml.Contracts.Builders
+{
+    using System;
+
+    public class XmlMemberBuilder : IXmlBuilder
+    {
+        public XmlMemberBuilder(Type valueType)
+        {
+            if (valueType == null)
+            {
+                throw new ArgumentNullException("valueType");
+            }
+
+            this.ValueType = valueType;
+        }
+
+        public Type ValueType { get; private set; }
+
+        public XmlName Name { get; set; }
+
+        public XmlTypeNameHandling? TypeNameHandling { get; set; }
+    }
+}

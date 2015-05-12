@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB736CD3-2055-467E-91CA-66B90695D222}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NetBike.Xml.Tests</RootNamespace>
+    <AssemblyName>NetBike.Xml.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NetBike.XmlUnit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NetBike.XmlUnit.0.1.0\lib\net45\NetBike.XmlUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="NetBike.XmlUnit.NUnitAdapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NetBike.XmlUnit.NUnitAdapter.0.1.0\lib\net45\NetBike.XmlUnit.NUnitAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contract\XmlContractAssert.cs" />
+    <Compile Include="Contract\XmlContractResolverExtensions.cs" />
+    <Compile Include="Contract\XmlContractResolverTests.cs" />
+    <Compile Include="Contract\XmlContractTests.cs" />
+    <Compile Include="Contract\XmlCustomContractResolverTests.cs" />
+    <Compile Include="Converters\Basics\BasicSample.cs" />
+    <Compile Include="Converters\Basics\XmlBasicConverterBaseTests.cs" />
+    <Compile Include="Converters\Basics\XmlDoubleConverterTests.cs" />
+    <Compile Include="Converters\Collections\XmlArrayConverterTests.cs" />
+    <Compile Include="Converters\Collections\XmlDictionaryConverterTests.cs" />
+    <Compile Include="Converters\Collections\XmlCollectionConverterBaseTests.cs" />
+    <Compile Include="Converters\Collections\XmlListConverterTests.cs" />
+    <Compile Include="Converters\Objects\XmlObjectConverterTests.cs" />
+    <Compile Include="Converters\Specialized\XmlByteArrayConverterTests.cs" />
+    <Compile Include="Converters\Specialized\XmlKeyValuePairConverterTests.cs" />
+    <Compile Include="Converters\Specialized\XmlKeyValuePairConverterTestsBase.cs" />
+    <Compile Include="Converters\Specialized\XmlNullableConverterTests.cs" />
+    <Compile Include="Converters\Specialized\XmlSerializableConverterTests.cs" />
+    <Compile Include="Converters\XmlConverterExtensions.cs" />
+    <Compile Include="Converters\XmlEnumConverterTests.cs" />
+    <Compile Include="Converters\Basics\XmlInt32ConverterTests.cs" />
+    <Compile Include="Converters\Basics\XmlStringConverterTests.cs" />
+    <Compile Include="Converters\Basics\XmlTimeSpanConverterTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Samples\Foo.cs" />
+    <Compile Include="Samples\FooBar.cs" />
+    <Compile Include="Samples\IBar.cs" />
+    <Compile Include="Samples\IFoo.cs" />
+    <Compile Include="XmlSerializerExtensions.cs" />
+    <Compile Include="TypeExtensionsTests.cs" />
+    <Compile Include="Utilities\RfcDateTimeTests.cs" />
+    <Compile Include="XmlSerializerTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetBike.Xml\NetBike.Xml.csproj">
+      <Project>{6230afc4-876e-48c0-b555-8be94e15d4d7}</Project>
+      <Name>NetBike.Xml</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

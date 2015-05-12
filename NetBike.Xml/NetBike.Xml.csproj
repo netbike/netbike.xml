@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6230AFC4-876E-48C0-B555-8BE94E15D4D7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NetBike.Xml</RootNamespace>
+    <AssemblyName>NetBike.Xml</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contracts\Builders\IXmlCollectionBuilder.cs" />
+    <Compile Include="Contracts\Builders\IXmlObjectBuilder.cs" />
+    <Compile Include="Contracts\Builders\IXmlBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlContractBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlContractBuilderExtensions.cs" />
+    <Compile Include="Contracts\Builders\XmlEnumContractBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlEnumContractBuilderOfT.cs" />
+    <Compile Include="Contracts\Builders\XmlEnumItemCollection.cs" />
+    <Compile Include="Contracts\Builders\XmlItemBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlKnownTypeBuilderCollection.cs" />
+    <Compile Include="Contracts\Builders\XmlBuilderExtensions.cs" />
+    <Compile Include="Contracts\Builders\XmlKnownTypeBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlMemberBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlObjectContractBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlObjectContractBuilderOfT.cs" />
+    <Compile Include="Contracts\Builders\XmlPropertyBuilder.cs" />
+    <Compile Include="Contracts\Builders\XmlPropertyBuilderCollection.cs" />
+    <Compile Include="Contracts\IXmlContractResolver.cs" />
+    <Compile Include="Contracts\XmlPropertyAttributes.cs" />
+    <Compile Include="Contracts\XmlContract.cs" />
+    <Compile Include="Contracts\XmlContractException.cs" />
+    <Compile Include="Contracts\XmlContractExtensions.cs" />
+    <Compile Include="Contracts\XmlContractResolver.cs" />
+    <Compile Include="Contracts\XmlCustomContractResolver.cs" />
+    <Compile Include="Contracts\XmlDefaultValueHandling.cs" />
+    <Compile Include="Contracts\XmlItem.cs" />
+    <Compile Include="Contracts\XmlEnumContract.cs" />
+    <Compile Include="Contracts\XmlEnumItem.cs" />
+    <Compile Include="Contracts\XmlKnownType.cs" />
+    <Compile Include="Contracts\XmlMappingType.cs" />
+    <Compile Include="Contracts\XmlMember.cs" />
+    <Compile Include="Contracts\XmlNamespace.cs" />
+    <Compile Include="Contracts\XmlNullValueHandling.cs" />
+    <Compile Include="Contracts\XmlObjectContract.cs" />
+    <Compile Include="Contracts\XmlProperty.cs" />
+    <Compile Include="Contracts\XmlPropertyComparer.cs" />
+    <Compile Include="Contracts\XmlTypeNameHandling.cs" />
+    <Compile Include="Converters\Basics\XmlBooleanConverter.cs" />
+    <Compile Include="Converters\Basics\XmlByteConverter.cs" />
+    <Compile Include="Converters\Basics\XmlCharConverter.cs" />
+    <Compile Include="Converters\Basics\XmlCustomDateTimeConverter.cs" />
+    <Compile Include="Converters\Basics\XmlDateTimeConverter.cs" />
+    <Compile Include="Converters\Basics\XmlDateTimeOffsetConverter.cs" />
+    <Compile Include="Converters\Basics\XmlDecimalConverter.cs" />
+    <Compile Include="Converters\Basics\XmlDoubleConverter.cs" />
+    <Compile Include="Converters\Collections\XmlItemInfo.cs" />
+    <Compile Include="Converters\Specialized\XmlSerializableConverter.cs" />
+    <Compile Include="Converters\Objects\Generators\XmlConvertMethod.cs" />
+    <Compile Include="Converters\Objects\XmlPropertyInfo.cs" />
+    <Compile Include="Converters\XmlBasicRawConverter.cs" />
+    <Compile Include="Converters\XmlEnumConverter.cs" />
+    <Compile Include="Converters\Basics\XmlGuidConverter.cs" />
+    <Compile Include="Converters\Basics\XmlInt16Converter.cs" />
+    <Compile Include="Converters\Basics\XmlInt32Converter.cs" />
+    <Compile Include="Converters\Basics\XmlInt64Converter.cs" />
+    <Compile Include="Converters\Basics\XmlSByteConverter.cs" />
+    <Compile Include="Converters\Basics\XmlSingleConverter.cs" />
+    <Compile Include="Converters\Basics\XmlStringConverter.cs" />
+    <Compile Include="Converters\Basics\XmlTimeSpanConverter.cs" />
+    <Compile Include="Converters\Basics\XmlUInt16Converter.cs" />
+    <Compile Include="Converters\Basics\XmlUInt32Converter.cs" />
+    <Compile Include="Converters\Basics\XmlUInt64Converter.cs" />
+    <Compile Include="Converters\Collections\ICollectionProxy.cs" />
+    <Compile Include="Converters\Collections\XmlArrayConverter.cs" />
+    <Compile Include="Converters\Collections\XmlCollectionConverter.cs" />
+    <Compile Include="Converters\Collections\XmlDictionaryConverter.cs" />
+    <Compile Include="Converters\Collections\XmlListConverter.cs" />
+    <Compile Include="Converters\IXmlConverter.cs" />
+    <Compile Include="Converters\IXmlConverterFactory.cs" />
+    <Compile Include="Converters\Objects\XmlObjectConverter.cs" />
+    <Compile Include="Converters\Specialized\XmlByteArrayConverter.cs" />
+    <Compile Include="Converters\Specialized\XmlKeyValuePairConverter.cs" />
+    <Compile Include="Converters\Specialized\XmlNullableConverter.cs" />
+    <Compile Include="Converters\Specialized\XmlTypeConverter.cs" />
+    <Compile Include="Converters\Specialized\XmlUriConverter.cs" />
+    <Compile Include="Converters\XmlConverterCollection.cs" />
+    <Compile Include="Converters\XmlBasicConverter.cs" />
+    <Compile Include="Converters\XmlConverterFactory.cs" />
+    <Compile Include="XmlNameRef.cs" />
+    <Compile Include="XmlSerializer.cs" />
+    <Compile Include="XmlTypeContext.cs" />
+    <Compile Include="TypeResolvers\IXmlTypeResolver.cs" />
+    <Compile Include="TypeResolvers\XmlTypeResolveException.cs" />
+    <Compile Include="TypeResolvers\XmlTypeResolver.cs" />
+    <Compile Include="Utilities\DynamicWrapperFactory.cs" />
+    <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Types.cs" />
+    <Compile Include="Contracts\XmlName.cs" />
+    <Compile Include="Utilities\RfcDateTime.cs" />
+    <Compile Include="XmlExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlSerializationContext.cs" />
+    <Compile Include="XmlSerializationException.cs" />
+    <Compile Include="XmlSerializationSettings.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

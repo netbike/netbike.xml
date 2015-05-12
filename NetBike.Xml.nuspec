@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>NetBike.Xml</id>
+        <version>0.2.0</version>
+        <title>NetBike.Xml</title>
+        <authors>Pavel Shkarin</authors>
+        <licenseUrl>https://github.com/netbike/netbike.xml/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/netbike/netbike.xml</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Fast, flexible and high customizable XML serializer for converting between .NET objects and XML.</description>
+        <summary />
+        <tags>XML serializer serialization</tags>
+    </metadata>
+    <files>
+        <file src="NetBike.Xml\bin\Release\NetBike.Xml.dll" target="lib\net40-client\NetBike.Xml.dll" />
+    </files>
+</package>
