@@ -13,7 +13,7 @@
         [Test]
         public void SerializeFooTest()
         {
-            var actual = new XmlSerializer().ToXml(new Foo
+            var actual = GetSerializer().ToXml(new Foo
             {
                 Id = 1,
                 Name = "test"
@@ -41,7 +41,7 @@
                 Name = "test"
             };
 
-            var actual = new XmlSerializer().ParseXml<Foo>(xml);
+            var actual = GetSerializer().ParseXml<Foo>(xml);
 
             Assert.AreEqual(expected, actual);
         }
@@ -49,7 +49,7 @@
         [Test]
         public void SerializeFooWithoutNamespacesTest()
         {
-            var serializer = new XmlSerializer();
+            var serializer = GetSerializer();
             serializer.Settings.Namespaces.Clear();
 
             var actual = serializer.ToXml(new Foo
@@ -69,7 +69,7 @@
         [Test]
         public void SerializeNullTest()
         {
-            var serializer = new XmlSerializer();
+            var serializer = GetSerializer();
             serializer.Settings.NullValueHandling = XmlNullValueHandling.Include;
 
             var actual = serializer.ToXml<Foo>(null);
@@ -95,7 +95,7 @@
         [Test]
         public void SerializeFooAsInterfaceTest()
         {
-            var serializer = new XmlSerializer();
+            var serializer = GetSerializer();
             serializer.Settings.OmitXmlDeclaration = true;
 
             var value = new Foo
@@ -131,7 +131,7 @@
                 Name = "foo"
             };
 
-            var actual = new XmlSerializer().ParseXml<IFoo>(xml);
+            var actual = GetSerializer().ParseXml<IFoo>(xml);
 
             Assert.AreEqual(expected, actual);
         }
@@ -151,7 +151,7 @@
                 Name = "test"
             };
 
-            var actual = new XmlSerializer().ParseXml<Foo>(xml);
+            var actual = GetSerializer().ParseXml<Foo>(xml);
 
             Assert.AreEqual(expected, actual);
         }
@@ -187,11 +187,19 @@
                 Name = "test"
             };
 
-            var serializer = new XmlSerializer();
-
-            var actual = serializer.ParseXml<SampleClass>(xml);
+            var actual = GetSerializer().ParseXml<SampleClass>(xml);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        private XmlSerializer GetSerializer()
+        {
+            var settings = new XmlSerializationSettings
+            {
+                ContractResolver = new XmlContractResolver(NamingConventions.CamelCase)
+            };
+
+            return new XmlSerializer(settings);
         }
 
         [XmlRoot(ElementName = "foo", Namespace = "http://example.org")]

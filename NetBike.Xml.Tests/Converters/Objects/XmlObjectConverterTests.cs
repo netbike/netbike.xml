@@ -90,7 +90,8 @@
             var settings = new XmlSerializationSettings
             {
                 OmitXmlDeclaration = true,
-                NullValueHandling = XmlNullValueHandling.Include
+                NullValueHandling = XmlNullValueHandling.Include,
+                ContractResolver = new XmlContractResolver(NamingConventions.CamelCase)
             };
 
             var actual = GetConverter().ToXml(value, settings: settings);

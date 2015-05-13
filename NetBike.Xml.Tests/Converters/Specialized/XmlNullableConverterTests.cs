@@ -63,7 +63,7 @@
         {
             var serializer = new XmlSerializer();
             var actual = serializer.ToXml(new TestClass2());
-            var expected = "<testClass2 />";
+            var expected = "<TestClass2 />";
             Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
         }
 
@@ -74,7 +74,7 @@
             serializer.Settings.OmitXmlDeclaration = true;
             serializer.Settings.NullValueHandling = XmlNullValueHandling.Include;
             var actual = serializer.ToXml(new TestClass());
-            var expected = @"<testClass xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><value xsi:nil=""true"" /></testClass>";
+            var expected = @"<TestClass xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><Value xsi:nil=""true"" /></TestClass>";
             Assert.That(actual, IsXml.Equals(expected));
         }
 
@@ -82,7 +82,7 @@
         public void ReadNullableTest()
         {
             var serializer = new XmlSerializer();
-            var xml = "<testClass><value>1</value></testClass>";
+            var xml = "<TestClass><Value>1</Value></TestClass>";
             var actual = serializer.ParseXml<TestClass>(xml);
             int? expected = 1;
             Assert.AreEqual(expected, actual.Value);

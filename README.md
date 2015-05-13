@@ -36,7 +36,7 @@ serializer.Settings.OmitXmlDeclaration = true;
 
 /*
     Output XML:
-    <foo><id>1</id><name>test</name></foo>
+    <Foo><Id>1</Id><Name>test</Name></Foo>
 */
 
 serializer.Serialize(Console.Out, new Foo
@@ -73,15 +73,17 @@ public static void Example()
         .SetProperty(x => x.Key, "id", XmlMappingType.Attribute)
         .SetProperty(x => x.Value, "value", XmlMappingType.InnerText)
         .Build();
-            
+
+    var contractResolver = new XmlCustomContractResolver(
+        new XmlContract[] { keyValuePairContract },
+        fallbackResolver: new XmlContractResolver(NamingConventions.CamelCase))
+
     var settings = new XmlSerializationSettings
     {
         Indent = true,
         OmitXmlDeclaration = true,
         NullValueHandling = XmlNullValueHandling.Include,
-        ContractResolver = new XmlCustomContractResolver(
-            new XmlContract[] { keyValuePairContract },
-            fallbackResolver: new XmlContractResolver(ignoreSystemAttributes: false))
+        ContractResolver = contractResolver
     };
 
     var serializer = new XmlSerializer(settings);

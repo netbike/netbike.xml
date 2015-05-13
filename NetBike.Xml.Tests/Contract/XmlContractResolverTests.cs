@@ -24,7 +24,7 @@
         [Test]
         public void ResolveObjectContractWithoutSystemAttributesTest()
         {
-            var resolver = new XmlContractResolver(ignoreSystemAttributes: true);
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase, ignoreSystemAttributes: true);
             var valueType = typeof(TestClass);
 
             var actual = resolver.ResolveContract(valueType);
@@ -42,7 +42,7 @@
         [Test]
         public void ResolveExtendedObjectContractWithoutSystemAttributesTest()
         {
-            var resolver = new XmlContractResolver(ignoreSystemAttributes: true);
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase, ignoreSystemAttributes: true);
             var valueType = typeof(ExtendedTestClass);
 
             var actual = resolver.ResolveContract(valueType);
@@ -61,7 +61,7 @@
         [Test]
         public void ResolveCollectionContractWithoutSystemAttributesTest()
         {
-            var resolver = new XmlContractResolver(ignoreSystemAttributes: true);
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase, ignoreSystemAttributes: true);
             var valueType = typeof(TestClassWithCollections);
 
             var actual = resolver.ResolveContract(valueType);
@@ -78,7 +78,7 @@
         [Test]
         public void ResolveGenericCollectionContractTest()
         {
-            var resolver = new XmlContractResolver(ignoreSystemAttributes: true);
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase, ignoreSystemAttributes: true);
             var valueType = typeof(List<TestClass>);
 
             var actual = resolver.ResolveContract(valueType);
@@ -96,7 +96,7 @@
         [Test]
         public void ResolveEnumContractWithoutSystemAttributesTest()
         {
-            var resolver = new XmlContractResolver(ignoreSystemAttributes: true);
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase, ignoreSystemAttributes: true);
             var valueType = typeof(TestEnum);
 
             var actual = resolver.ResolveContract(valueType);
@@ -114,7 +114,7 @@
         [Test]
         public void ResolveObjectContractTest()
         {
-            var resolver = new XmlContractResolver();
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase);
             var valueType = typeof(TestClass);
 
             var actual = resolver.ResolveContract(valueType);
@@ -136,7 +136,8 @@
         [Test]
         public void ResolveObjectContractWithInnerTextTest()
         {
-            var resolver = new XmlContractResolver(useCamelCaseNotation: false);
+            var resolver = new XmlContractResolver(NamingConventions.Ignore);
+
             var valueType = typeof(TestClassWithInnerText);
 
             var actual = resolver.ResolveContract(valueType);
@@ -153,7 +154,7 @@
         [Test]
         public void ResolveObjectContractWithElementKnownTypesTest()
         {
-            var resolver = new XmlContractResolver();
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase);
 
             var actual = resolver.ResolveContract<TestClassWithElementKnownTypes>();
 
@@ -171,7 +172,7 @@
         [Test]
         public void ResolveObjectContractWithCollectionItemKnownTypesTest()
         {
-            var actual = new XmlContractResolver()
+            var actual = new XmlContractResolver(NamingConventions.CamelCase)
                 .ResolveContract<TestClassWithCollectionItemKnownTypes>();
 
             var expected = new XmlObjectContractBuilder<TestClassWithCollectionItemKnownTypes>()
@@ -190,7 +191,8 @@
         [Test]
         public void ResolveObjectContractWithCollectionsTest()
         {
-            var actual = new XmlContractResolver().ResolveContract<TestClassWithCollections>();
+            var actual = new XmlContractResolver(NamingConventions.CamelCase)
+                .ResolveContract<TestClassWithCollections>();
 
             var expected = new XmlObjectContractBuilder<TestClassWithCollections>()
                 .SetName("testClassWithCollections")
@@ -206,7 +208,8 @@
         [Test]
         public void ResolveObjectContractWithFlattenCollectionTest()
         {
-            var actual = new XmlContractResolver().ResolveContract<TestClassWithFlattenCollection>();
+            var actual = new XmlContractResolver(NamingConventions.CamelCase)
+                .ResolveContract<TestClassWithFlattenCollection>();
 
             var expected = new XmlObjectContractBuilder<TestClassWithFlattenCollection>()
                 .SetName("testClassWithFlattenCollection")
@@ -222,7 +225,7 @@
         [Test]
         public void ResolveObjectContractWithFlattenCollectionKnownTypesTest()
         {
-            var resolver = new XmlContractResolver();
+            var resolver = new XmlContractResolver(NamingConventions.CamelCase);
 
             var actual = resolver.ResolveContract<TestClassWithFlattenCollectionKnownTypes>();
 

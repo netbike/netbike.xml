@@ -41,11 +41,13 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\NamingConventionsTests.cs" />
     <Compile Include="Contract\XmlContractAssert.cs" />
     <Compile Include="Contract\XmlContractResolverExtensions.cs" />
     <Compile Include="Contract\XmlContractResolverTests.cs" />

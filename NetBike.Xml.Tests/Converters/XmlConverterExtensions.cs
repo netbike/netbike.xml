@@ -99,7 +99,8 @@
             {
                 settings = new XmlSerializationSettings
                 {
-                    OmitXmlDeclaration = true
+                    OmitXmlDeclaration = true,
+                    ContractResolver = new XmlContractResolver(NamingConventions.CamelCase)
                 };
             }
 

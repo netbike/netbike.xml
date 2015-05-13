@@ -9,23 +9,23 @@
 
     public class XmlContractResolver : IXmlContractResolver
     {
-        private readonly bool useCamelCaseNotation;
+        private readonly Func<string, string> nameResolver;
         private readonly bool ignoreSystemAttributes;
 
-        public XmlContractResolver(bool useCamelCaseNotation = true, bool ignoreSystemAttributes = false)
+        public XmlContractResolver(bool ignoreSystemAttributes = false)
+            : this(NamingConventions.Ignore, ignoreSystemAttributes)
         {
-            this.useCamelCaseNotation = useCamelCaseNotation;
+        }
+
+        public XmlContractResolver(Func<string, string> nameResolver, bool ignoreSystemAttributes = false)
+        {
+            if (nameResolver == null)
+            {
+                throw new ArgumentNullException("nameResolver");
+            }
+
             this.ignoreSystemAttributes = ignoreSystemAttributes;
-        }
-
-        public bool UseCamelCaseNotation
-        {
-            get { return this.useCamelCaseNotation; }
-        }
-
-        public bool IgnoreSystemAttributes
-        {
-            get { return this.ignoreSystemAttributes; }
+            this.nameResolver = nameResolver;
         }
 
         public virtual XmlContract ResolveContract(Type valueType)
@@ -92,14 +92,12 @@
 
         protected virtual string GetLocalName(string name)
         {
-            if (this.useCamelCaseNotation && name.Length > 0 && !char.IsLower(name[0]))
-            {
-                var chars = name.ToCharArray();
-                chars[0] = char.ToLower(chars[0]);
-                name = new string(chars);
-            }
+            return this.nameResolver(name);
+        }
 
-            return name;
+        protected virtual string GetEnumItemName(Type valueType, string name)
+        {
+            return this.nameResolver(name);
         }
 
         protected virtual IEnumerable<PropertyInfo> GetProperties(Type valueType)
@@ -135,7 +133,7 @@
             for (int i = 0; i < count; i++)
             {
                 var field = fields[i];
-                var name = this.GetLocalName(field.Name);
+                var name = this.GetEnumItemName(valueType, field.Name);
                 var value = Convert.ToInt64(field.GetRawConstantValue());
 
                 if (!this.ignoreSystemAttributes)
@@ -211,7 +209,7 @@
                     else if (propertyType.IsAssignableFrom(attribute.Type))
                     {
                         propertyBuilder.SetKnownType(
-                            attribute.Type, 
+                            attribute.Type,
                             x => x.SetName(name).SetNullable(attribute.IsNullable));
                     }
 
