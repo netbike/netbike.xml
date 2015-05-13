@@ -4,27 +4,17 @@
     using System.IO;
     using System.Xml;
 
-    public sealed class XmlByteArrayConverter : IXmlConverter
+    public sealed class XmlByteArrayConverter : XmlConverter<byte[]>
     {
         public const int ChunkSize = 512;
 
-        public bool CanRead(Type valueType)
-        {
-            return valueType == typeof(byte[]);
-        }
-
-        public bool CanWrite(Type valueType)
-        {
-            return valueType == typeof(byte[]);
-        }
-
-        public void WriteXml(XmlWriter writer, object value, XmlSerializationContext context)
+        public override void WriteXml(XmlWriter writer, object value, XmlSerializationContext context)
         {
             var bytes = (byte[])value;
             writer.WriteBase64(bytes, 0, bytes.Length);
         }
 
-        public object ReadXml(XmlReader reader, XmlSerializationContext context)
+        public override object ReadXml(XmlReader reader, XmlSerializationContext context)
         {
             if (reader.NodeType == XmlNodeType.Attribute)
             {
