@@ -7,7 +7,7 @@ Fast, flexible and high customizable XML serializer for converting between .NET 
 * Custom formatting and construction of objects via IXmlConverter
 * Built-in support for the Nullable<>, List<>, Dictionary<> and more
 * Supports for base and derived types via IXmlTypeResolver
-* Partial supports for XML attributes of System.Xml.XmlSerializer
+* Compatibility with XML attributes of System.Xml.XmlSerializer
 * .NET 4
 
 Install
@@ -15,7 +15,9 @@ Install
 
 Install via [NuGet package](https://www.nuget.org/packages/NetBike.Xml/):
 
-	PM> Install-Package NetBike.Xml
+```
+PM> Install-Package NetBike.Xml
+```
 
 Documentation
 -------------
