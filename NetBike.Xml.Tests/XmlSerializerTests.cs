@@ -1,5 +1,6 @@
 ﻿namespace NetBike.Xml.Tests
 {
+    using System.Linq;
     using System.Xml.Serialization;
     using NetBike.Xml.Contracts;
     using NetBike.Xml.Tests.Samples;
@@ -190,6 +191,23 @@
             var actual = GetSerializer().ParseXml<SampleClass>(xml);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void SerializeAnonymousEnumerableTest()
+        {
+            var items = new Foo[]
+            {
+                new Foo { Id = 1 },
+                new Foo { Id = 2 }
+            };
+
+            var value = items.Where(x => true);
+
+            var actual = GetSerializer().ToXml(value);
+            var expected = "<whereArrayIterator><foo><id>1</id></foo><foo><id>2</id></foo></whereArrayIterator>";
+
+            Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
         }
 
         private XmlSerializer GetSerializer()

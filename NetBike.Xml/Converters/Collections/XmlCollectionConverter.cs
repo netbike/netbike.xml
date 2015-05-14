@@ -12,7 +12,7 @@
 
         public virtual bool CanWrite(Type valueType)
         {
-            return true;
+            return valueType.IsEnumerable();
         }
 
         public abstract ICollectionProxy CreateProxy(Type valueType);

@@ -81,6 +81,7 @@
     <Compile Include="Converters\Basics\XmlDateTimeOffsetConverter.cs" />
     <Compile Include="Converters\Basics\XmlDecimalConverter.cs" />
     <Compile Include="Converters\Basics\XmlDoubleConverter.cs" />
+    <Compile Include="Converters\Collections\XmlEnumerableConverter.cs" />
     <Compile Include="Converters\Collections\XmlItemInfo.cs" />
     <Compile Include="Converters\Specialized\XmlSerializableConverter.cs" />
     <Compile Include="Converters\Objects\Generators\XmlConvertMethod.cs" />

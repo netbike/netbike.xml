@@ -48,7 +48,7 @@
 
         public Type ValueType
         {
-            get { return this.Contract.ValueType; }
+            get { return this.currentContract.ValueType; }
         }
 
         public XmlContract Contract
@@ -151,7 +151,7 @@
 
         internal bool ShouldWriteTypeName(Type valueType, Type memberType, XmlMember member)
         {
-            if (!member.IsFinalType)
+            if (!member.IsClosedType)
             {
                 var typeNameHandling = member.TypeNameHandling ?? this.settings.TypeNameHandling;
 

@@ -62,6 +62,7 @@
                 new XmlDictionaryConverter(),
                 new XmlKeyValuePairConverter(),
                 new XmlNullableConverter(),
+                new XmlEnumerableConverter(),
                 new XmlObjectConverter()
             };
         }
@@ -340,7 +341,7 @@
 
             foreach (var converter in this.converters.Concat(DefaultConverters))
             {
-                if (converter.CanRead(valueType))
+                if (readConverter == null && converter.CanRead(valueType))
                 {
                     readConverter = converter;
 
@@ -350,7 +351,7 @@
                     }
                 }
 
-                if (converter.CanWrite(valueType))
+                if (writeConverter == null && converter.CanWrite(valueType))
                 {
                     writeConverter = converter;
 

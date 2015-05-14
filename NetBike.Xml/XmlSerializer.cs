@@ -1,11 +1,8 @@
 ﻿namespace NetBike.Xml
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Xml;
-    using NetBike.Xml.Contracts;
-    using NetBike.Xml.Converters;
 
     public sealed class XmlSerializer
     {
@@ -29,6 +26,16 @@
         public XmlSerializationSettings Settings
         {
             get { return this.settings; }
+        }
+
+        public bool CanSerialize(Type valueType)
+        {
+            return this.settings.GetTypeContext(valueType).WriteConverter != null;
+        }
+
+        public bool CanDeserialize(Type valueType)
+        {
+            return this.settings.GetTypeContext(valueType).ReadConverter != null;
         }
 
         public void Serialize<T>(Stream stream, T value)
