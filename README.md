@@ -50,7 +50,7 @@ A simple object deserialization:
 
 ```csharp
 var serializer = new XmlSerializer();
-var xml = "<foo><id>1</id><name>test</name></foo>";
+var xml = "<Foo><Id>1</Id><Name>test</Name></Foo>";
 var foo = serializer.Deserialize<Foo>(new StringReader(xml));
 ```
 
