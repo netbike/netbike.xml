@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBike.Xml", "NetBike.Xml\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBike.Xml.Tests", "NetBike.Xml.Tests\NetBike.Xml.Tests.csproj", "{CB736CD3-2055-467E-91CA-66B90695D222}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBike.Xml.Formatting", "NetBike.Xml.Formatting\NetBike.Xml.Formatting.csproj", "{EAF3DF13-85E1-4B52-A6B6-DA17EE0EA3AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CB736CD3-2055-467E-91CA-66B90695D222}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB736CD3-2055-467E-91CA-66B90695D222}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB736CD3-2055-467E-91CA-66B90695D222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF3DF13-85E1-4B52-A6B6-DA17EE0EA3AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF3DF13-85E1-4B52-A6B6-DA17EE0EA3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF3DF13-85E1-4B52-A6B6-DA17EE0EA3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF3DF13-85E1-4B52-A6B6-DA17EE0EA3AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

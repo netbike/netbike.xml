@@ -1,18 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>NetBike.Xml</id>
+        <id>NetBike.Xml.Formatting</id>
         <version>0.4.0</version>
-        <title>NetBike.Xml</title>
+        <title>NetBike.Xml.Formatting</title>
         <authors>Pavel Shkarin</authors>
         <licenseUrl>https://github.com/netbike/netbike.xml/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/netbike/netbike.xml</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Fast, flexible and high customizable XML serializer for converting between .NET objects and XML.</description>
+        <description>Fast, flexible and high customizable XML formatter for Web API.</description>
         <summary />
-        <tags>XML serializer serialization</tags>
+        <tags>XML webapi formatter mediatypeformatter</tags>
+        <dependencies>
+            <dependency id="NetBike.Xml" version="0.4.0" />
+        </dependencies>
     </metadata>
     <files>
-        <file src="NetBike.Xml\bin\Release\NetBike.Xml.dll" target="lib\net40-client\NetBike.Xml.dll" />
+        <file src="NetBike.Xml.Formatting\bin\Release\NetBike.Xml.Formatting.dll" target="lib\net40-client\NetBike.Xml.Formatting.dll" />
     </files>
 </package>
