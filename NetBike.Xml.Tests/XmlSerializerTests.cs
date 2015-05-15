@@ -308,7 +308,7 @@
 
         private XmlSerializer GetSerializer()
         {
-            var settings = new XmlSerializationSettings
+            var settings = new XmlSerializerSettings
             {
                 ContractResolver = new XmlContractResolver(NamingConventions.CamelCase)
             };

@@ -87,7 +87,7 @@
                 Name = null
             };
 
-            var settings = new XmlSerializationSettings
+            var settings = new XmlSerializerSettings
             {
                 OmitXmlDeclaration = true,
                 NullValueHandling = XmlNullValueHandling.Include,

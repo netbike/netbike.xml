@@ -6,14 +6,14 @@
 
     public sealed class XmlSerializer
     {
-        private readonly XmlSerializationSettings settings;
+        private readonly XmlSerializerSettings settings;
 
         public XmlSerializer()
-            : this(new XmlSerializationSettings())
+            : this(new XmlSerializerSettings())
         {
         }
 
-        public XmlSerializer(XmlSerializationSettings settings)
+        public XmlSerializer(XmlSerializerSettings settings)
         {
             if (settings == null)
             {
@@ -23,7 +23,7 @@
             this.settings = settings;
         }
 
-        public XmlSerializationSettings Settings
+        public XmlSerializerSettings Settings
         {
             get { return this.settings; }
         }

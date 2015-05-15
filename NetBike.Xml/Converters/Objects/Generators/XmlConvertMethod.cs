@@ -20,7 +20,7 @@
             this.toStringExpression = toStringExpression;
         }
 
-        public static IEnumerable<XmlConvertMethod> GetMethods(XmlSerializationSettings settings)
+        public static IEnumerable<XmlConvertMethod> GetMethods(XmlSerializerSettings settings)
         {
             if (settings == null)
             {

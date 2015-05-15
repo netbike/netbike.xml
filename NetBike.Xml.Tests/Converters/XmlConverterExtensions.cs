@@ -10,17 +10,17 @@
 
     public static class XmlConverterExtensions
     {
-        public static TValue ParseXml<TValue>(this IXmlConverter converter, string xmlString, XmlMember member = null, XmlContract contract = null, XmlSerializationSettings settings = null)
+        public static TValue ParseXml<TValue>(this IXmlConverter converter, string xmlString, XmlMember member = null, XmlContract contract = null, XmlSerializerSettings settings = null)
         {
             return (TValue)ParseXml(converter, typeof(TValue), xmlString, member, contract, settings);
         }
 
-        public static string ToXml<TValue>(this IXmlConverter converter, TValue value, XmlMember member = null, XmlContract contract = null, XmlSerializationSettings settings = null)
+        public static string ToXml<TValue>(this IXmlConverter converter, TValue value, XmlMember member = null, XmlContract contract = null, XmlSerializerSettings settings = null)
         {
             return ToXml(converter, typeof(TValue), value, member, contract, settings);
         }
 
-        public static object ParseXml(this IXmlConverter converter, Type valueType, string xmlString, XmlMember member = null, XmlContract contract = null, XmlSerializationSettings settings = null)
+        public static object ParseXml(this IXmlConverter converter, Type valueType, string xmlString, XmlMember member = null, XmlContract contract = null, XmlSerializerSettings settings = null)
         {
             var context = CreateContext(valueType, member, contract, settings);
 
@@ -63,7 +63,7 @@
             }
         }
 
-        public static string ToXml(this IXmlConverter converter, Type valueType, object value, XmlMember member = null, XmlContract contract = null, XmlSerializationSettings settings = null)
+        public static string ToXml(this IXmlConverter converter, Type valueType, object value, XmlMember member = null, XmlContract contract = null, XmlSerializerSettings settings = null)
         {
             var builder = new StringBuilder();
             var context = CreateContext(valueType, member, contract, settings);
@@ -93,11 +93,11 @@
             return builder.ToString();
         }
 
-        private static XmlSerializationContext CreateContext(Type valueType, XmlMember member, XmlContract contract, XmlSerializationSettings settings)
+        private static XmlSerializationContext CreateContext(Type valueType, XmlMember member, XmlContract contract, XmlSerializerSettings settings)
         {
             if (settings == null)
             {
-                settings = new XmlSerializationSettings
+                settings = new XmlSerializerSettings
                 {
                     OmitXmlDeclaration = true,
                     ContractResolver = new XmlContractResolver(NamingConventions.CamelCase)

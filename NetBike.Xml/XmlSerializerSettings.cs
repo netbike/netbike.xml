@@ -15,7 +15,7 @@
     using NetBike.Xml.Converters.Specialized;
     using NetBike.Xml.TypeResolvers;
 
-    public sealed class XmlSerializationSettings
+    public sealed class XmlSerializerSettings
     {
         private static readonly XmlConverterCollection DefaultConverters;
 
@@ -34,7 +34,7 @@
         private XmlReaderSettings readerSettings;
         private XmlWriterSettings writerSettings;
 
-        static XmlSerializationSettings()
+        static XmlSerializerSettings()
         {
             DefaultConverters = new XmlConverterCollection
             {
@@ -67,7 +67,7 @@
             };
         }
 
-        public XmlSerializationSettings()
+        public XmlSerializerSettings()
         {
             this.converters = new XmlConverterCollection();
             this.converters.CollectionChanged += (sender, ea) => this.typeContextCache.Clear();

@@ -8,7 +8,7 @@
 
     public sealed partial class XmlSerializationContext
     {
-        private readonly XmlSerializationSettings settings;
+        private readonly XmlSerializerSettings settings;
         private XmlContract currentContract;
         private XmlMember currentMember;
         private bool initialState;
@@ -17,7 +17,7 @@
         private XmlNameRef nullNameRef;
         private XmlReader lastUsedReader;
 
-        public XmlSerializationContext(XmlSerializationSettings settings)
+        public XmlSerializationContext(XmlSerializerSettings settings)
         {
             if (settings == null)
             {
@@ -28,7 +28,7 @@
             this.initialState = true;
         }
 
-        internal XmlSerializationContext(XmlSerializationSettings settings, XmlMember member, XmlContract contract)
+        internal XmlSerializationContext(XmlSerializerSettings settings, XmlMember member, XmlContract contract)
             : this(settings)
         {
             if (contract == null)
@@ -74,7 +74,7 @@
             }
         }
 
-        public XmlSerializationSettings Settings
+        public XmlSerializerSettings Settings
         {
             get { return this.settings; }
         }
