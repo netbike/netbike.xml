@@ -65,7 +65,7 @@
                 this.valueType,
                 this.name,
                 XmlMappingType.Element,
-                XmlTypeNameHandling.None,
+                XmlTypeHandling.None,
                 XmlNullValueHandling.Include,
                 XmlDefaultValueHandling.Include);
         }

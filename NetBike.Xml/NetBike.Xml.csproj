@@ -72,7 +72,7 @@
     <Compile Include="Contracts\XmlObjectContract.cs" />
     <Compile Include="Contracts\XmlProperty.cs" />
     <Compile Include="Contracts\XmlPropertyComparer.cs" />
-    <Compile Include="Contracts\XmlTypeNameHandling.cs" />
+    <Compile Include="Contracts\XmlTypeHandling.cs" />
     <Compile Include="Converters\Basics\XmlBooleanConverter.cs" />
     <Compile Include="Converters\Basics\XmlByteConverter.cs" />
     <Compile Include="Converters\Basics\XmlCharConverter.cs" />

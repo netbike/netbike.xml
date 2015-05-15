@@ -18,6 +18,6 @@
 
         public XmlName Name { get; set; }
 
-        public XmlTypeNameHandling? TypeNameHandling { get; set; }
+        public XmlTypeHandling? TypeHandling { get; set; }
     }
 }

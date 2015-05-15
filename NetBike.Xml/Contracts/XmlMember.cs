@@ -12,7 +12,7 @@
         private readonly Type valueType;
         private readonly XmlItem item;
         private readonly XmlMappingType mappingType;
-        private readonly XmlTypeNameHandling? typeNameHandling;
+        private readonly XmlTypeHandling? typeHandling;
         private readonly XmlDefaultValueHandling? defaultValueHandling;
         private readonly XmlNullValueHandling? nullValueHandling;
         private readonly object defaultValue;
@@ -23,7 +23,7 @@
             Type valueType,
             XmlName name,
             XmlMappingType mappingType = XmlMappingType.Element,
-            XmlTypeNameHandling? typeNameHandling = null,
+            XmlTypeHandling? typeHandling = null,
             XmlNullValueHandling? nullValueHandling = null,
             XmlDefaultValueHandling? defaultValueHandling = null,
             object defaultValue = null,
@@ -44,7 +44,7 @@
 
             this.valueType = valueType;
             this.name = name;
-            this.typeNameHandling = typeNameHandling;
+            this.typeHandling = typeHandling;
             this.defaultValueHandling = defaultValueHandling;
             this.defaultValue = defaultValue;
             this.isOpenType = !isFinalType && valueType.IsVisible;
@@ -103,9 +103,9 @@
             get { return this.mappingType; }
         }
 
-        public XmlTypeNameHandling? TypeNameHandling
+        public XmlTypeHandling? TypeHandling
         {
-            get { return this.typeNameHandling; }
+            get { return this.typeHandling; }
         }
 
         public XmlNullValueHandling? NullValueHandling

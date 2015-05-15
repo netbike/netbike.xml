@@ -9,7 +9,7 @@
     {
         private static readonly List<XmlProperty> EmptyProperties = new List<XmlProperty>();
 
-        private readonly XmlTypeNameHandling? typeNameHandling;
+        private readonly XmlTypeHandling? typeHandling;
         private readonly XmlItem item;
         private readonly List<XmlProperty> properties;
         private readonly bool hasRequiredOrDefaultsProperties;
@@ -19,7 +19,7 @@
             Type valueType,
             XmlName name,
             IEnumerable<XmlProperty> properties = null,
-            XmlTypeNameHandling? typeNameHandling = null,
+            XmlTypeHandling? typeHandling = null,
             XmlItem item = null)
             : base(valueType, name)
         {
@@ -31,7 +31,7 @@
             }
 
             this.item = item;
-            this.typeNameHandling = typeNameHandling;
+            this.typeHandling = typeHandling;
             this.properties = new List<XmlProperty>(properties);
 
             foreach (var property in this.properties)
@@ -84,9 +84,9 @@
             get { return this.item; }
         }
 
-        public XmlTypeNameHandling? TypeNameHandling
+        public XmlTypeHandling? TypeHandling
         {
-            get { return this.typeNameHandling; }
+            get { return this.typeHandling; }
         }
 
         internal bool HasRequiredOrDefaultsProperties
@@ -105,7 +105,7 @@
                 this.ValueType,
                 this.Name,
                 XmlMappingType.Element,
-                this.typeNameHandling,
+                this.typeHandling,
                 null,
                 null,
                 null,

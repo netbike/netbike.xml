@@ -227,7 +227,7 @@
             };
 
             var serializer = GetSerializer();
-            serializer.Settings.TypeNameHandling = XmlTypeNameHandling.None;
+            serializer.Settings.TypeHandling = XmlTypeHandling.None;
 
             var actual = serializer.ToXml<IEnumerable<Foo>>(value);
             var expected = "<ienumerable><foo><id>1</id></foo><foo><id>2</id></foo></ienumerable>";
@@ -260,7 +260,7 @@
             };
 
             var serializer = GetSerializer();
-            serializer.Settings.TypeNameHandling = XmlTypeNameHandling.None;
+            serializer.Settings.TypeHandling = XmlTypeHandling.None;
             var actual = serializer.ToXml(value);
             var expected = @"<list xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><foo><id>1</id></foo><foo><id>2</id></foo></list>";
 
@@ -299,7 +299,7 @@
             };
 
             var serializer = GetSerializer();
-            serializer.Settings.TypeNameHandling = XmlTypeNameHandling.None;
+            serializer.Settings.TypeHandling = XmlTypeHandling.None;
             var actual = serializer.ToXml(value);
             var expected = @"<fooContainer xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><foo><id>1</id></foo></fooContainer>";
 

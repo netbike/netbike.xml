@@ -78,7 +78,7 @@
             this.typeAttributeName = new XmlName("type", XmlNamespace.Xsi);
             this.nullAttributeName = new XmlName("nil", XmlNamespace.Xsi);
             this.encoding = Encoding.UTF8;
-            this.TypeNameHandling = XmlTypeNameHandling.Auto;
+            this.TypeHandling = XmlTypeHandling.Auto;
             this.NullValueHandling = XmlNullValueHandling.Ignore;
             this.DefaultValueHandling = XmlDefaultValueHandling.Include;
             this.omitXmlDeclaration = false;
@@ -90,7 +90,7 @@
             };
         }
 
-        public XmlTypeNameHandling TypeNameHandling { get; set; }
+        public XmlTypeHandling TypeHandling { get; set; }
 
         public XmlNullValueHandling NullValueHandling { get; set; }
 

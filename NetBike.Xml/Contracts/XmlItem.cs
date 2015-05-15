@@ -5,8 +5,8 @@
 
     public sealed class XmlItem : XmlMember
     {
-        public XmlItem(Type valueType, XmlName name, XmlTypeNameHandling? typeNameHandling = null, IEnumerable<XmlKnownType> knownTypes = null)
-            : base(valueType, name, typeNameHandling: typeNameHandling, knownTypes: knownTypes)
+        public XmlItem(Type valueType, XmlName name, XmlTypeHandling? typeHandling = null, IEnumerable<XmlKnownType> knownTypes = null)
+            : base(valueType, name, typeHandling: typeHandling, knownTypes: knownTypes)
         {
         }
     }

@@ -22,7 +22,7 @@
             XmlName name,
             XmlMappingType mappingType = XmlMappingType.Element,
             bool isRequired = false,
-            XmlTypeNameHandling? typeNameHandling = null,
+            XmlTypeHandling? typeHandling = null,
             XmlNullValueHandling? nullValueHandling = null,
             XmlDefaultValueHandling? defaultValueHandling = null,
             object defaultValue = null,
@@ -30,7 +30,7 @@
             IEnumerable<XmlKnownType> knownTypes = null,
             bool isCollection = false,
             int order = -1)
-            : base(propertyInfo.PropertyType, name, mappingType, typeNameHandling, nullValueHandling, defaultValueHandling, defaultValue, item, knownTypes)
+            : base(propertyInfo.PropertyType, name, mappingType, typeHandling, nullValueHandling, defaultValueHandling, defaultValue, item, knownTypes)
         {
             if (isCollection)
             {

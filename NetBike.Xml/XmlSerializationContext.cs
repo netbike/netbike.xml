@@ -211,13 +211,13 @@
         {
             if (member.IsOpenType)
             {
-                var typeNameHandling = member.TypeNameHandling ?? this.settings.TypeNameHandling;
+                var typeHandling = member.TypeHandling ?? this.settings.TypeHandling;
 
-                if (typeNameHandling != XmlTypeNameHandling.None)
+                if (typeHandling != XmlTypeHandling.None)
                 {
                     valueType = value.GetType();
                     member = member.ResolveMember(valueType);
-                    return typeNameHandling == XmlTypeNameHandling.Always || valueType != member.ValueType;
+                    return typeHandling == XmlTypeHandling.Always || valueType != member.ValueType;
                 }
             }
 

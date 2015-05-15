@@ -21,7 +21,7 @@
             return new XmlItemBuilder(item.ValueType)
             {
                 Name = item.Name,
-                TypeNameHandling = item.TypeNameHandling,
+                TypeHandling = item.TypeHandling,
                 KnownTypes = item.KnownTypes != null ? XmlKnownTypeBuilderCollection.Create(item.KnownTypes) : null
             };
         }
@@ -31,7 +31,7 @@
             return new XmlItem(
                 this.ValueType,
                 this.Name ?? this.ValueType.GetShortName(),
-                this.TypeNameHandling,
+                this.TypeHandling,
                 this.KnownTypes != null ? this.KnownTypes.Build() : null);
         }
     }

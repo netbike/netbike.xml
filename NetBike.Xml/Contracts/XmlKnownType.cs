@@ -7,11 +7,11 @@
         public XmlKnownType(
             Type valueType,
             XmlName name,
-            XmlTypeNameHandling? typeNameHandling = null,
+            XmlTypeHandling? typeHandling = null,
             XmlNullValueHandling? nullValueHandling = null,
             XmlDefaultValueHandling? defaultValueHandling = null,
             object defaultValue = null)
-            : base(valueType, name, XmlMappingType.Element, typeNameHandling, nullValueHandling, defaultValueHandling, defaultValue)
+            : base(valueType, name, XmlMappingType.Element, typeHandling, nullValueHandling, defaultValueHandling, defaultValue)
         {
         }
     }

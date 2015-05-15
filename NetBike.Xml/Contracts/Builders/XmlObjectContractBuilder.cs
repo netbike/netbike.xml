@@ -9,7 +9,7 @@
         {
         }
 
-        public XmlTypeNameHandling? TypeNameHandling { get; set; }
+        public XmlTypeHandling? TypeHandling { get; set; }
 
         public XmlPropertyBuilderCollection Properties { get; set; }
 
@@ -25,7 +25,7 @@
             return new XmlObjectContractBuilder(contract.ValueType)
             {
                 Name = contract.Name,
-                TypeNameHandling = contract.TypeNameHandling,
+                TypeHandling = contract.TypeHandling,
                 Properties = XmlPropertyBuilderCollection.Create(contract.Properties),
                 Item = contract.Item != null ? XmlItemBuilder.Create(contract.Item) : null
             };
@@ -37,7 +37,7 @@
                 this.ValueType,
                 this.Name ?? this.ValueType.GetShortName(),
                 this.Properties != null ? this.Properties.Build() : null,
-                this.TypeNameHandling,
+                this.TypeHandling,
                 this.Item != null ? this.Item.Build() : null);
         }
 

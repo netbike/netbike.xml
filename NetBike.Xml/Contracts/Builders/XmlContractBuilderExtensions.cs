@@ -6,10 +6,10 @@
 
     public static class XmlContractBuilderExtensions
     {
-        public static TBuilder SetTypeNameHandling<TBuilder>(this TBuilder builder, XmlTypeNameHandling? typeNameHandling)
+        public static TBuilder SetTypeHandling<TBuilder>(this TBuilder builder, XmlTypeHandling? typeHandling)
             where TBuilder : XmlObjectContractBuilder
         {
-            builder.TypeNameHandling = typeNameHandling;
+            builder.TypeHandling = typeHandling;
             return builder;
         }
 

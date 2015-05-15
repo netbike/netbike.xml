@@ -27,8 +27,8 @@
                 var ao = (XmlObjectContract)actual;
 
                 AreEqual(eo.Item, ao.Item);
-                Assert.AreEqual(eo.TypeNameHandling.HasValue, ao.TypeNameHandling.HasValue);
-                Assert.AreEqual(eo.TypeNameHandling, ao.TypeNameHandling);
+                Assert.AreEqual(eo.TypeHandling.HasValue, ao.TypeHandling.HasValue);
+                Assert.AreEqual(eo.TypeHandling, ao.TypeHandling);
 
                 Assert.AreEqual(eo.Properties.Count, ao.Properties.Count);
 
@@ -69,8 +69,8 @@
             Assert.AreEqual(expected.DefaultValueHandling.HasValue, actual.DefaultValueHandling.HasValue);
             Assert.AreEqual(expected.DefaultValueHandling, actual.DefaultValueHandling);
             Assert.AreEqual(expected.DefaultValue, actual.DefaultValue);
-            Assert.AreEqual(expected.TypeNameHandling.HasValue, actual.TypeNameHandling.HasValue);
-            Assert.AreEqual(expected.TypeNameHandling, actual.TypeNameHandling);
+            Assert.AreEqual(expected.TypeHandling.HasValue, actual.TypeHandling.HasValue);
+            Assert.AreEqual(expected.TypeHandling, actual.TypeHandling);
             Assert.AreEqual(expected.NullValueHandling.HasValue, actual.NullValueHandling.HasValue);
             Assert.AreEqual(expected.NullValueHandling, actual.NullValueHandling);
 

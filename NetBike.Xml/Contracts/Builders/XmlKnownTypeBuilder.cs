@@ -25,7 +25,7 @@
             return new XmlKnownTypeBuilder(knownType.ValueType)
             {
                 Name = knownType.Name,
-                TypeNameHandling = knownType.TypeNameHandling,
+                TypeHandling = knownType.TypeHandling,
                 NullValueHandling = knownType.NullValueHandling,
                 DefaultValueHandling = knownType.DefaultValueHandling,
                 DefaultValue = knownType.DefaultValue
@@ -37,7 +37,7 @@
             return new XmlKnownType(
                 this.ValueType,
                 this.Name ?? this.ValueType.GetShortName(),
-                this.TypeNameHandling,
+                this.TypeHandling,
                 this.NullValueHandling,
                 this.DefaultValueHandling,
                 this.DefaultValue);
