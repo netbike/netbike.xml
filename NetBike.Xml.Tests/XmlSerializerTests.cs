@@ -1,5 +1,6 @@
 ﻿namespace NetBike.Xml.Tests
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Serialization;
     using NetBike.Xml.Contracts;
@@ -106,11 +107,11 @@
             };
 
             var expected = @"
-<foo xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+<ifoo xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
      xsi:type=""NetBike.Xml.Tests.Samples.Foo"">
   <id>1</id>
   <name>test</name>
-</foo>";
+</ifoo>";
             var actual = serializer.ToXml<IFoo>(value);
 
             Assert.That(actual, IsXml.Equals(expected));
@@ -194,18 +195,113 @@
         }
 
         [Test]
-        public void SerializeAnonymousEnumerableTest()
+        public void SerializeEnumerableTest()
         {
-            var items = new Foo[]
+            var value = new List<Foo>
             {
                 new Foo { Id = 1 },
                 new Foo { Id = 2 }
             };
 
-            var value = items.Where(x => true);
+            var actual = GetSerializer().ToXml<IEnumerable<Foo>>(value);
+            var expected = string.Format(@"
+<ienumerable xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""{0}"">
+  <foo>
+    <id>1</id>
+  </foo>
+  <foo>
+    <id>2</id>
+</foo>
+</ienumerable>", value.GetType().FullName);
+
+            Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
+        }
+
+        [Test]
+        public void SerializeEnumerableWithoutTypeHandlingTest()
+        {
+            var value = new List<Foo>
+            {
+                new Foo { Id = 1 },
+                new Foo { Id = 2 }
+            };
+
+            var serializer = GetSerializer();
+            serializer.Settings.TypeNameHandling = XmlTypeNameHandling.None;
+
+            var actual = serializer.ToXml<IEnumerable<Foo>>(value);
+            var expected = "<ienumerable><foo><id>1</id></foo><foo><id>2</id></foo></ienumerable>";
+
+            Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
+        }
+
+        [Test]
+        public void SerializeFooCollectionWithFooBarTypeTest()
+        {
+            var value = new List<Foo>
+            {
+                new Foo { Id = 1},
+                new FooBar { Id = 2, Description = "test" }
+            };
 
             var actual = GetSerializer().ToXml(value);
-            var expected = "<whereArrayIterator><foo><id>1</id></foo><foo><id>2</id></foo></whereArrayIterator>";
+            var expected = @"<list xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><foo><id>1</id></foo><foo xsi:type=""NetBike.Xml.Tests.Samples.FooBar""><description>test</description><id>2</id></foo></list>";
+
+            Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
+        }
+
+        [Test]
+        public void SerializeFooCollectionWithFooBarTypeAndWithoutTypeHandlingTest()
+        {
+            var value = new List<Foo>
+            {
+                new Foo { Id = 1},
+                new FooBar { Id = 2, Description = "test" }
+            };
+
+            var serializer = GetSerializer();
+            serializer.Settings.TypeNameHandling = XmlTypeNameHandling.None;
+            var actual = serializer.ToXml(value);
+            var expected = @"<list xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><foo><id>1</id></foo><foo><id>2</id></foo></list>";
+
+            Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
+        }
+
+        [Test]
+        public void SerializeFooContainerTest()
+        {
+            var value = new FooContainer
+            {
+                Foo = new FooBar
+                {
+                    Id = 1,
+                    Description = "test"
+                }
+            };
+
+            var serializer = GetSerializer();
+            var actual = serializer.ToXml(value);
+            var expected = @"<fooContainer xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><foo xsi:type=""NetBike.Xml.Tests.Samples.FooBar""><description>test</description><id>1</id></foo></fooContainer>";
+
+            Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
+        }
+
+        [Test]
+        public void SerializeFooContainerWithoutTypeHandlingTest()
+        {
+            var value = new FooContainer
+            {
+                Foo = new FooBar
+                {
+                    Id = 1,
+                    Description = "test"
+                }
+            };
+
+            var serializer = GetSerializer();
+            serializer.Settings.TypeNameHandling = XmlTypeNameHandling.None;
+            var actual = serializer.ToXml(value);
+            var expected = @"<fooContainer xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><foo><id>1</id></foo></fooContainer>";
 
             Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
         }

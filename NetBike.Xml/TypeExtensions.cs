@@ -62,19 +62,29 @@
 
             Type elementType = null;
 
-            foreach (var interfaceType in type.GetInterfaces())
+            if (type == Types.Enumerable)
             {
-                if (interfaceType.IsGenericType)
+                elementType = Types.Object;
+            }
+            else if (type.IsGenericType && 
+                type.GetGenericTypeDefinition() == Types.EnumerableDefinition)
+            {
+                elementType = type.GetGenericArguments()[0];
+            }
+            else
+            {
+                foreach (var interfaceType in type.GetInterfaces())
                 {
-                    if (interfaceType.GetGenericTypeDefinition() == Types.EnumerableDefinition)
+                    if (interfaceType == Types.Enumerable)
+                    {
+                        elementType = Types.Object;
+                    }
+                    else if (interfaceType.IsGenericType &&
+                        interfaceType.GetGenericTypeDefinition() == Types.EnumerableDefinition)
                     {
                         elementType = interfaceType.GetGenericArguments()[0];
                         break;
                     }
-                }
-                else if (interfaceType == Types.Enumerable)
-                {
-                    elementType = Types.Object;
                 }
             }
 

@@ -134,37 +134,6 @@
             this.SerializeBody(writer, value, member.ValueType, member);
         }
 
-        internal bool ShouldWriteValue(object value, XmlMember member)
-        {
-            if (member.DefaultValue != null)
-            {
-                var defaultValueHandling = member.DefaultValueHandling ?? this.settings.DefaultValueHandling;
-
-                if (defaultValueHandling == XmlDefaultValueHandling.Ignore && value.Equals(member.DefaultValue))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        internal bool ShouldWriteTypeName(Type valueType, Type memberType, XmlMember member)
-        {
-            if (!member.IsClosedType)
-            {
-                var typeNameHandling = member.TypeNameHandling ?? this.settings.TypeNameHandling;
-
-                if (typeNameHandling != XmlTypeNameHandling.None &&
-                   (typeNameHandling == XmlTypeNameHandling.Always || valueType != memberType))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         internal void WriteTypeName(XmlWriter writer, Type valueType)
         {
             var typeName = this.settings.TypeResolver.GetTypeName(valueType);
@@ -205,7 +174,7 @@
             }
         }
         
-        internal bool ReadSerializationType(XmlReader reader, ref Type valueType)
+        internal bool ReadValueType(XmlReader reader, ref Type valueType)
         {
             if (reader.AttributeCount > 0)
             {
@@ -236,6 +205,25 @@
             }
 
             return true;
+        }
+
+        internal bool TryResolveValueType(object value, ref XmlMember member, out Type valueType)
+        {
+            if (member.IsOpenType)
+            {
+                var typeNameHandling = member.TypeNameHandling ?? this.settings.TypeNameHandling;
+
+                if (typeNameHandling != XmlTypeNameHandling.None)
+                {
+                    valueType = value.GetType();
+                    member = member.ResolveMember(valueType);
+                    return typeNameHandling == XmlTypeNameHandling.Always || valueType != member.ValueType;
+                }
+            }
+
+            valueType = member.ValueType;
+
+            return false;
         }
 
         internal void WriteXml(XmlWriter writer, object value, XmlMember member, XmlTypeContext typeContext)
@@ -299,57 +287,64 @@
                 return;
             }
 
-            var valueType = value.GetType();
-            var typeContext = this.settings.GetTypeContext(valueType);
+            Type valueType;
+            XmlTypeContext context = null;
 
             if (member == null)
             {
-                member = typeContext.Contract.Root;
-            }
-            else
-            {
-                member = member.ResolveMember(valueType);
-                memberType = valueType;
+                context = this.settings.GetTypeContext(memberType);
+                member = context.Contract.Root;
             }
 
-            if (!this.ShouldWriteValue(value, member))
+            var shouldWriteTypeName = this.TryResolveValueType(value, ref member, out valueType);
+
+            if (member.DefaultValue != null)
             {
-                return;
-            }
+                var defaultValueHandling = member.DefaultValueHandling ?? this.settings.DefaultValueHandling;
 
-            var mappingType = member.MappingType;
-
-            if (mappingType == XmlMappingType.Element)
-            {
-                writer.WriteStartElement(member.Name);
-
-                if (this.initialState)
+                if (defaultValueHandling == XmlDefaultValueHandling.Ignore && value.Equals(member.DefaultValue))
                 {
-                    this.initialState = false;
-                    this.WriteNamespaces(writer);
+                    return;
                 }
-
-                if (this.ShouldWriteTypeName(valueType, memberType, member))
-                {
-                    this.WriteTypeName(writer, valueType);
-                }
-
-                this.WriteXml(writer, value, member, typeContext);
-
-                writer.WriteEndElement();
             }
-            else if (mappingType == XmlMappingType.Attribute)
+
+            if (context == null || context.Contract.ValueType != member.ValueType)
             {
-                writer.WriteStartAttribute(member.Name);
-                this.WriteXml(writer, value, member, typeContext);
-                writer.WriteEndAttribute();
+                context = this.settings.GetTypeContext(valueType);
             }
-            else
+
+            switch (member.MappingType)
             {
-                this.WriteXml(writer, value, member, typeContext);
+                case XmlMappingType.Element:
+                    writer.WriteStartElement(member.Name);
+
+                    if (this.initialState)
+                    {
+                        this.initialState = false;
+                        this.WriteNamespaces(writer);
+                    }
+
+                    if (shouldWriteTypeName)
+                    {
+                        this.WriteTypeName(writer, valueType);
+                    }
+
+                    this.WriteXml(writer, value, member, context);
+                    writer.WriteEndElement();
+                    break;
+
+                case XmlMappingType.Attribute:
+                    writer.WriteStartAttribute(member.Name);
+                    this.WriteXml(writer, value, member, context);
+                    writer.WriteEndAttribute();
+                    break;
+
+                case XmlMappingType.InnerText:
+                    this.WriteXml(writer, value, member, context);
+                    break;
             }
         }
-
+                
         private object Deserialize(XmlReader reader, Type valueType, XmlMember member)
         {
             if (reader == null)
@@ -377,7 +372,7 @@
 
             if (reader.NodeType == XmlNodeType.Element)
             {
-                if (!this.ReadSerializationType(reader, ref valueType))
+                if (!this.ReadValueType(reader, ref valueType))
                 {
                     reader.Skip();
                     return null;

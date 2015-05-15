@@ -16,7 +16,7 @@
         private readonly XmlDefaultValueHandling? defaultValueHandling;
         private readonly XmlNullValueHandling? nullValueHandling;
         private readonly object defaultValue;
-        private readonly bool isClosedType;
+        private readonly bool isOpenType;
         private readonly List<XmlKnownType> knownTypes;
 
         internal XmlMember(
@@ -40,12 +40,17 @@
                 throw new ArgumentNullException("name");
             }
 
+            var isFinalType = valueType.IsFinalType();
+
             this.valueType = valueType;
             this.name = name;
             this.typeNameHandling = typeNameHandling;
             this.defaultValueHandling = defaultValueHandling;
             this.defaultValue = defaultValue;
-            this.isClosedType = valueType.IsFinalType() || !valueType.IsVisible;
+            this.isOpenType = !isFinalType && valueType.IsVisible;
+            this.item = item;
+            this.nullValueHandling = nullValueHandling;
+            this.mappingType = mappingType;
 
             if (knownTypes != null)
             {
@@ -58,7 +63,7 @@
                         throw new ArgumentException("Known types may be set only for XML Element.", "knownTypes");
                     }
 
-                    if (this.isClosedType)
+                    if (isFinalType)
                     {
                         throw new ArgumentException("Known types cannot be set for final value type.", "knownTypes");
                     }
@@ -128,9 +133,9 @@
             get { return this.knownTypes ?? EmptyKnownTypes; }
         }
 
-        internal bool IsClosedType
+        internal bool IsOpenType
         {
-            get { return this.isClosedType; }
+            get { return this.isOpenType; }
         }
 
         internal XmlMember ResolveMember(Type valueType)

@@ -33,8 +33,6 @@
 
             Type lastItemType = null;
             XmlTypeContext typeContext = null;
-            var shouldWriteTypeName = true;
-            XmlMember member = collectionItem;
 
             foreach (var item in (IEnumerable)value)
             {
@@ -44,13 +42,13 @@
                 }
                 else
                 {
-                    var itemType = item.GetType();
+                    Type itemType;
+                    var member = (XmlMember)collectionItem;
+                    var shouldWriteTypeName = context.TryResolveValueType(item, ref member, out itemType);
 
                     if (itemType != lastItemType)
                     {
-                        member = collectionItem.ResolveMember(itemType);
                         typeContext = context.Settings.GetTypeContext(itemType);
-                        shouldWriteTypeName = context.ShouldWriteTypeName(itemType, member.ValueType, member);
                         lastItemType = itemType;
                     }
 
@@ -104,7 +102,7 @@
                         {
                             var valueType = member.ValueType;
 
-                            if (context.ReadSerializationType(reader, ref valueType))
+                            if (context.ReadValueType(reader, ref valueType))
                             {
                                 if (lastItemType != valueType)
                                 {

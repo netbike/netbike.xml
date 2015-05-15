@@ -29,7 +29,7 @@
 
             if (member.MappingType == XmlMappingType.Element)
             {
-                if (!context.ReadSerializationType(reader, ref underlyingType))
+                if (!context.ReadValueType(reader, ref underlyingType))
                 {
                     reader.Skip();
                     return null;

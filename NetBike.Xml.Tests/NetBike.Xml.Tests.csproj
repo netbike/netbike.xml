@@ -72,6 +72,7 @@
     <Compile Include="Converters\Basics\XmlStringConverterTests.cs" />
     <Compile Include="Converters\Basics\XmlTimeSpanConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Samples\FooContainer.cs" />
     <Compile Include="Samples\Foo.cs" />
     <Compile Include="Samples\FooBar.cs" />
     <Compile Include="Samples\IBar.cs" />
