@@ -143,7 +143,7 @@
             }
         }
 
-        public XmlName TypeAttribute
+        public XmlName TypeAttributeName
         {
             get
             {
@@ -161,7 +161,7 @@
             }
         }
 
-        public XmlName NullAttribute
+        public XmlName NullAttributeName
         {
             get
             {

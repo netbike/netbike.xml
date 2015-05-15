@@ -240,7 +240,7 @@
         {
             var value = new List<Foo>
             {
-                new Foo { Id = 1},
+                new Foo { Id = 1 },
                 new FooBar { Id = 2, Description = "test" }
             };
 
@@ -255,7 +255,7 @@
         {
             var value = new List<Foo>
             {
-                new Foo { Id = 1},
+                new Foo { Id = 1 },
                 new FooBar { Id = 2, Description = "test" }
             };
 

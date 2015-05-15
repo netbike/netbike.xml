@@ -1,6 +1,7 @@
 ﻿namespace NetBike.Xml.Contracts
 {
     using System;
+    using System.Xml;
 
     public class XmlNamespace
     {
@@ -21,6 +22,8 @@
             {
                 throw new ArgumentNullException("namespaceUri");
             }
+
+            XmlConvert.VerifyNCName(prefix);
 
             VerifyNamespaceUri(namespaceUri);
 

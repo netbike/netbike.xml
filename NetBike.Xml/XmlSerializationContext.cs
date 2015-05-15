@@ -6,7 +6,7 @@
     using NetBike.Xml.Contracts;
     using NetBike.Xml.Converters;
 
-    public sealed partial class XmlSerializationContext
+    public sealed class XmlSerializationContext
     {
         private readonly XmlSerializerSettings settings;
         private XmlContract currentContract;
@@ -137,7 +137,7 @@
         internal void WriteTypeName(XmlWriter writer, Type valueType)
         {
             var typeName = this.settings.TypeResolver.GetTypeName(valueType);
-            writer.WriteAttributeString(this.settings.TypeAttribute, typeName);
+            writer.WriteAttributeString(this.settings.TypeAttributeName, typeName);
         }
 
         internal void WriteNull(XmlWriter writer, Type valueType, XmlMember member)
@@ -169,7 +169,7 @@
                     this.WriteNamespaces(writer);
                 }
 
-                writer.WriteAttributeString(this.settings.NullAttribute, "true");
+                writer.WriteAttributeString(this.settings.NullAttributeName, "true");
                 writer.WriteEndElement();
             }
         }
@@ -180,8 +180,8 @@
             {
                 if (!object.ReferenceEquals(this.lastUsedReader, reader))
                 {
-                    this.typeNameRef.Reset(this.settings.TypeAttribute, reader.NameTable);
-                    this.nullNameRef.Reset(this.settings.NullAttribute, reader.NameTable);
+                    this.typeNameRef.Reset(this.settings.TypeAttributeName, reader.NameTable);
+                    this.nullNameRef.Reset(this.settings.NullAttributeName, reader.NameTable);
                     this.lastUsedReader = reader;
                 }
 
