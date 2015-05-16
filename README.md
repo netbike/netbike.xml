@@ -19,6 +19,12 @@ Install via [NuGet package](https://www.nuget.org/packages/NetBike.Xml/):
 PM> Install-Package NetBike.Xml
 ```
 
+Install media type formatter for Web API via [NuGet package](https://www.nuget.org/packages/NetBike.Xml.Formatting/):
+
+```
+PM> Install-Package NetBike.Xml.Formatting
+```
+
 Documentation
 -------------
 
