@@ -18,9 +18,9 @@
                 Types.Object,
                 Type.EmptyTypes,
                 Module)
-                {
-                    InitLocals = true
-                };
+            {
+                InitLocals = true
+            };
 
             var generator = dynamicMethod.GetILGenerator();
 
@@ -101,8 +101,12 @@
 
         private static void EmitUnboxOrCast(ILGenerator il, Type type)
         {
-            var opCode = type.IsValueType ? OpCodes.Unbox_Any : OpCodes.Castclass;
-            il.Emit(opCode, type);
+            var underlyingType = Nullable.GetUnderlyingType(type);
+            if (underlyingType == null)
+            {
+                var opCode = type.IsValueType ? OpCodes.Unbox_Any : OpCodes.Castclass;
+                il.Emit(opCode, type);
+            }
         }
 
         private static void EmitMethodCall(ILGenerator il, MethodInfo method)

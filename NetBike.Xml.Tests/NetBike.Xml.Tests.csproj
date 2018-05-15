@@ -75,6 +75,7 @@
     <Compile Include="Samples\FooContainer.cs" />
     <Compile Include="Samples\Foo.cs" />
     <Compile Include="Samples\FooBar.cs" />
+    <Compile Include="Samples\FooEnum.cs" />
     <Compile Include="Samples\IBar.cs" />
     <Compile Include="Samples\IFoo.cs" />
     <Compile Include="XmlSerializerExtensions.cs" />
