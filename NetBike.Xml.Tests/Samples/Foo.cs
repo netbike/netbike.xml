@@ -1,13 +1,13 @@
 ﻿namespace NetBike.Xml.Tests.Samples
 {
     using System;
-    using NetBike.Xml.Contracts;
 
     public class Foo : IFoo
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
+        public FooEnum? EnumValue { get; set; }
 
         public override bool Equals(object obj)
         {

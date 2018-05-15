@@ -1,7 +1,6 @@
 ﻿namespace NetBike.Xml.Tests
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Xml.Serialization;
     using NetBike.Xml.Contracts;
     using NetBike.Xml.Tests.Samples;
@@ -92,6 +91,49 @@
             var actual = serializer.ParseXml<Foo>(xml);
 
             Assert.IsNull(actual);
+        }
+
+        [Test]
+        public void SerializeEnumTest()
+        {
+            var value = new Foo
+            {
+                Id = 1,
+                Name = "test",
+                EnumValue = FooEnum.Value1
+            };
+
+            var expected = @"<?xml version=""1.0"" encoding=""utf-16""?>
+<foo xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <id>1</id>
+  <name>test</name>
+  <enumValue>value1</enumValue>
+</foo>";
+
+            var actual = GetSerializer().ToXml(value);
+
+            Assert.That(actual, IsXml.Equals(expected));
+        }
+
+        [Test]
+        public void DeserializeEnumTest()
+        {
+            var xml = @"<?xml version=""1.0"" encoding=""utf-16""?>
+<foo xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <id>1</id>
+  <name>test</name>
+  <enumValue>value1</enumValue>
+</foo>";
+            var expected = new Foo
+            {
+                Id = 1,
+                Name = "test",
+                EnumValue = FooEnum.Value1
+            };
+
+            var actual = GetSerializer().ParseXml<Foo>(xml);
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
