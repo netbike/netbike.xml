@@ -102,7 +102,14 @@
         private static void EmitUnboxOrCast(ILGenerator il, Type type)
         {
             var underlyingType = Nullable.GetUnderlyingType(type);
-            if (underlyingType == null)
+            if (underlyingType != null)
+            {
+                il.Emit(OpCodes.Unbox_Any, underlyingType);
+                
+                var ci = typeof(Nullable<>).MakeGenericType(underlyingType).GetConstructor(new[] { underlyingType });
+                il.Emit(OpCodes.Newobj, ci);
+            }
+            else
             {
                 var opCode = type.IsValueType ? OpCodes.Unbox_Any : OpCodes.Castclass;
                 il.Emit(opCode, type);
