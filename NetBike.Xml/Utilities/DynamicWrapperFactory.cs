@@ -104,8 +104,10 @@
             var underlyingType = Nullable.GetUnderlyingType(type);
             if (underlyingType != null)
             {
-                var opCode = OpCodes.Unbox_Any;
-                il.Emit(opCode, underlyingType);
+                il.Emit(OpCodes.Unbox_Any, underlyingType);
+                
+                var ci = typeof(Nullable<>).MakeGenericType(underlyingType).GetConstructor(new[] { underlyingType });
+                il.Emit(OpCodes.Newobj, ci);
             }
             else
             {
