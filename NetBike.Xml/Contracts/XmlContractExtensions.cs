@@ -1,7 +1,6 @@
 ﻿namespace NetBike.Xml.Contracts
 {
     using System;
-    using System.Reflection;
 
     internal static class XmlContractExtensions
     {
@@ -9,14 +8,14 @@
         {
             if (contract == null)
             {
-                throw new ArgumentNullException("contract");
+                throw new ArgumentNullException(nameof(contract));
             }
 
             var objectContract = contract as XmlObjectContract;
 
             if (objectContract == null)
             {
-                throw new XmlSerializationException(string.Format("Contract \"{0}\" must be object contract.", contract.ValueType));
+                throw new XmlSerializationException($"Contract \"{contract.ValueType}\" must be object contract.");
             }
 
             return objectContract;
@@ -26,14 +25,14 @@
         {
             if (contract == null)
             {
-                throw new ArgumentNullException("contract");
+                throw new ArgumentNullException(nameof(contract));
             }
 
             var enumContract = contract as XmlEnumContract;
 
             if (enumContract == null)
             {
-                throw new XmlSerializationException(string.Format("Contract \"{0}\" must be enum contract.", contract.ValueType));
+                throw new XmlSerializationException($"Contract \"{contract.ValueType}\" must be enum contract.");
             }
 
             return enumContract;

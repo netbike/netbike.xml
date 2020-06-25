@@ -8,15 +8,6 @@
     {
         private static readonly List<XmlKnownType> EmptyKnownTypes = new List<XmlKnownType>();
 
-        private readonly XmlName name;
-        private readonly Type valueType;
-        private readonly XmlItem item;
-        private readonly XmlMappingType mappingType;
-        private readonly XmlTypeHandling? typeHandling;
-        private readonly XmlDefaultValueHandling? defaultValueHandling;
-        private readonly XmlNullValueHandling? nullValueHandling;
-        private readonly object defaultValue;
-        private readonly bool isOpenType;
         private readonly List<XmlKnownType> knownTypes;
 
         internal XmlMember(
@@ -32,25 +23,25 @@
         {
             if (valueType == null)
             {
-                throw new ArgumentNullException("valueType");
+                throw new ArgumentNullException(nameof(valueType));
             }
 
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var isFinalType = valueType.IsFinalType();
 
-            this.valueType = valueType;
-            this.name = name;
-            this.typeHandling = typeHandling;
-            this.defaultValueHandling = defaultValueHandling;
-            this.defaultValue = defaultValue;
-            this.isOpenType = !isFinalType && valueType.IsVisible;
-            this.item = item;
-            this.nullValueHandling = nullValueHandling;
-            this.mappingType = mappingType;
+            this.ValueType = valueType;
+            this.Name = name;
+            this.TypeHandling = typeHandling;
+            this.DefaultValueHandling = defaultValueHandling;
+            this.DefaultValue = defaultValue;
+            this.IsOpenType = !isFinalType && valueType.IsVisible;
+            this.Item = item;
+            this.NullValueHandling = nullValueHandling;
+            this.MappingType = mappingType;
 
             if (knownTypes != null)
             {
@@ -60,26 +51,28 @@
                 {
                     if (mappingType != XmlMappingType.Element)
                     {
-                        throw new ArgumentException("Known types may be set only for XML Element.", "knownTypes");
+                        throw new ArgumentException("Known types may be set only for XML Element.", nameof(knownTypes));
                     }
 
                     if (isFinalType)
                     {
-                        throw new ArgumentException("Known types cannot be set for final value type.", "knownTypes");
+                        throw new ArgumentException("Known types cannot be set for final value type.", nameof(knownTypes));
                     }
 
                     this.knownTypes = new List<XmlKnownType>(count);
 
                     foreach (var knownType in knownTypes)
                     {
-                        if (valueType == knownType.valueType)
+                        if (valueType == knownType.ValueType)
                         {
-                            throw new ArgumentException(string.Format("Known type \"{0}\" cannot be equal to the value type.", valueType), "knownTypes");
+                            throw new ArgumentException(
+                                $"Known type \"{valueType}\" cannot be equal to the value type.", nameof(knownTypes));
                         }
 
                         if (!valueType.IsAssignableFrom(knownType.ValueType))
                         {
-                            throw new ArgumentException(string.Format("Known type \"{0}\" must be inherits from \"{1}\".", knownType.ValueType, valueType), "knownTypes");
+                            throw new ArgumentException(
+                                $"Known type \"{knownType.ValueType}\" must be inherits from \"{valueType}\".", nameof(knownTypes));
                         }
 
                         this.knownTypes.Add(knownType);
@@ -88,55 +81,25 @@
             }
         }
 
-        public Type ValueType
-        {
-            get { return this.valueType; }
-        }
+        public Type ValueType { get; }
 
-        public XmlName Name
-        {
-            get { return this.name; }
-        }
+        public XmlName Name { get; }
 
-        public XmlMappingType MappingType
-        {
-            get { return this.mappingType; }
-        }
+        public XmlMappingType MappingType { get; }
 
-        public XmlTypeHandling? TypeHandling
-        {
-            get { return this.typeHandling; }
-        }
+        public XmlTypeHandling? TypeHandling { get; }
 
-        public XmlNullValueHandling? NullValueHandling
-        {
-            get { return this.nullValueHandling; }
-        }
+        public XmlNullValueHandling? NullValueHandling { get; }
 
-        public XmlDefaultValueHandling? DefaultValueHandling
-        {
-            get { return this.defaultValueHandling; }
-        }
+        public XmlDefaultValueHandling? DefaultValueHandling { get; }
 
-        public object DefaultValue
-        {
-            get { return this.defaultValue; }
-        }
+        public object DefaultValue { get; }
 
-        public XmlItem Item
-        {
-            get { return this.item; }
-        }
+        public XmlItem Item { get; }
 
-        public IReadOnlyList<XmlKnownType> KnownTypes
-        {
-            get { return this.knownTypes ?? EmptyKnownTypes; }
-        }
+        public IReadOnlyList<XmlKnownType> KnownTypes => this.knownTypes ?? EmptyKnownTypes;
 
-        internal bool IsOpenType
-        {
-            get { return this.isOpenType; }
-        }
+        internal bool IsOpenType { get; }
 
         internal XmlMember ResolveMember(Type valueType)
         {
@@ -144,7 +107,7 @@
             {
                 foreach (var item in this.knownTypes)
                 {
-                    if (item.valueType == valueType)
+                    if (item.ValueType == valueType)
                     {
                         return item;
                     }

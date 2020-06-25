@@ -21,7 +21,7 @@
         {
             if (settings == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException(nameof(settings));
             }
 
             this.serializer = new XmlSerializer(settings);
@@ -33,13 +33,7 @@
             this.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml"));
         }
 
-        public XmlSerializerSettings Settings
-        {
-            get
-            {
-                return this.serializer.Settings;
-            }
-        }
+        public XmlSerializerSettings Settings => this.serializer.Settings;
 
         public override bool CanReadType(Type type)
         {

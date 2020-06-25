@@ -79,7 +79,7 @@
         }
 
         [Test]
-        public void WriteFooWithGlobalInlcludeNullHandlingTest()
+        public void WriteFooWithGlobalIncludeNullHandlingTest()
         {
             var value = new Foo
             {
@@ -95,7 +95,7 @@
             };
 
             var actual = GetConverter().ToXml(value, settings: settings);
-            var expected = @"<xml><id>1</id><name xsi:nil=""true"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" /></xml>";
+            var expected = @"<xml><id>1</id><name xsi:nil=""true"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" /><enumValue xsi:nil=""true"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" /></xml>";
 
             Assert.That(actual, IsXml.Equals(expected).WithIgnore(XmlComparisonType.NamespacePrefix));
         }

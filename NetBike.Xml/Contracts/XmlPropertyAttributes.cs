@@ -5,7 +5,6 @@
     using System.ComponentModel;
     using System.Reflection;
     using System.Xml.Serialization;
-    using NetBike.Xml.Contracts.Builders;
 
     internal sealed class XmlPropertyAttributes
     {
@@ -27,55 +26,57 @@
         {
             if (propertyInfo == null)
             {
-                throw new ArgumentNullException("propertyInfo");
+                throw new ArgumentNullException(nameof(propertyInfo));
             }
 
             var attributes = new XmlPropertyAttributes();
 
             foreach (var attribute in Attribute.GetCustomAttributes(propertyInfo))
             {
-                if (attribute is XmlElementAttribute)
+                switch (attribute)
                 {
-                    if (attributes.Elements == null)
+                    case XmlElementAttribute elementAttribute:
                     {
-                        attributes.Elements = new List<XmlElementAttribute>();
-                    }
+                        if (attributes.Elements == null)
+                        {
+                            attributes.Elements = new List<XmlElementAttribute>();
+                        }
 
-                    attributes.Elements.Add((XmlElementAttribute)attribute);
-                }
-                else if (attribute is XmlAttributeAttribute)
-                {
-                    if (attributes.Attributes == null)
+                        attributes.Elements.Add(elementAttribute);
+                        break;
+                    }
+                    case XmlAttributeAttribute attributeAttribute:
                     {
-                        attributes.Attributes = new List<XmlAttributeAttribute>();
-                    }
+                        if (attributes.Attributes == null)
+                        {
+                            attributes.Attributes = new List<XmlAttributeAttribute>();
+                        }
 
-                    attributes.Attributes.Add((XmlAttributeAttribute)attribute);
-                }
-                else if (attribute is XmlArrayItemAttribute)
-                {
-                    if (attributes.ArrayItems == null)
+                        attributes.Attributes.Add(attributeAttribute);
+                        break;
+                    }
+                    case XmlArrayItemAttribute itemAttribute:
                     {
-                        attributes.ArrayItems = new List<XmlArrayItemAttribute>();
-                    }
+                        if (attributes.ArrayItems == null)
+                        {
+                            attributes.ArrayItems = new List<XmlArrayItemAttribute>();
+                        }
 
-                    attributes.ArrayItems.Add((XmlArrayItemAttribute)attribute);
-                }
-                else if (attribute is XmlArrayAttribute)
-                {
-                    attributes.Array = (XmlArrayAttribute)attribute;
-                }
-                else if (attribute is XmlTextAttribute)
-                {
-                    attributes.Text = (XmlTextAttribute)attribute;
-                }
-                else if (attribute is DefaultValueAttribute)
-                {
-                    attributes.Default = (DefaultValueAttribute)attribute;
-                }
-                else if (attribute is XmlIgnoreAttribute)
-                {
-                    attributes.Ignore = (XmlIgnoreAttribute)attribute;
+                        attributes.ArrayItems.Add(itemAttribute);
+                        break;
+                    }
+                    case XmlArrayAttribute arrayAttribute:
+                        attributes.Array = arrayAttribute;
+                        break;
+                    case XmlTextAttribute textAttribute:
+                        attributes.Text = textAttribute;
+                        break;
+                    case DefaultValueAttribute valueAttribute:
+                        attributes.Default = valueAttribute;
+                        break;
+                    case XmlIgnoreAttribute ignoreAttribute:
+                        attributes.Ignore = ignoreAttribute;
+                        break;
                 }
             }
 

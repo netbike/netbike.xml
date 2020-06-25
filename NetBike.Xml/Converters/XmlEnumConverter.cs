@@ -71,7 +71,8 @@
 
             if (enumName == null)
             {
-                throw new FormatException(string.Format("Enumerable value \"{0}\" of type \"{1}\" is invalid.", enumValue, contract.ValueType));
+                throw new FormatException(
+                    $"Enumerable value \"{enumValue}\" of type \"{contract.ValueType}\" is invalid.");
             }
 
             writer.WriteString(enumName);
@@ -89,7 +90,7 @@
             }
             else
             {
-                var names = valueString.Split(new char[] { this.separator }, StringSplitOptions.RemoveEmptyEntries);
+                var names = valueString.Split(new[] { this.separator }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var name in names)
                 {
@@ -112,7 +113,7 @@
                 }
             }
 
-            throw new FormatException(string.Format("Enumerable name \"{0}\" of type \"{1}\" is invalid.", name, contract.ValueType));
+            throw new FormatException($"Enumerable name \"{name}\" of type \"{contract.ValueType}\" is invalid.");
         }
     }
 }

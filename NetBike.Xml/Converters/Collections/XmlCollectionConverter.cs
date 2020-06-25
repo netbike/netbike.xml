@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
     using System.Xml;
     using NetBike.Xml.Contracts;
 
@@ -21,14 +20,14 @@
         {
             if (context.Member.MappingType != XmlMappingType.Element)
             {
-                throw new XmlSerializationException(string.Format("XML mapping of \"{0}\" must be Element.", context.ValueType));
+                throw new XmlSerializationException($"XML mapping of \"{context.ValueType}\" must be Element.");
             }
 
             var collectionItem = GetCollectionItem(context);
 
             if (collectionItem == null)
             {
-                throw new XmlSerializationException(string.Format("XML contract of \"{0}\" must contains collection item", context.ValueType));
+                throw new XmlSerializationException($"XML contract of \"{context.ValueType}\" must contains collection item");
             }
 
             Type lastItemType = null;
@@ -42,9 +41,8 @@
                 }
                 else
                 {
-                    Type itemType;
                     var member = (XmlMember)collectionItem;
-                    var shouldWriteTypeName = context.TryResolveValueType(item, ref member, out itemType);
+                    var shouldWriteTypeName = context.TryResolveValueType(item, ref member, out var itemType);
 
                     if (itemType != lastItemType)
                     {
@@ -70,14 +68,14 @@
         {
             if (context.Member.MappingType != XmlMappingType.Element)
             {
-                throw new XmlSerializationException(string.Format("XML mapping of \"{0}\" must be Element.", context.ValueType));
+                throw new XmlSerializationException($"XML mapping of \"{context.ValueType}\" must be Element.");
             }
 
             var item = GetCollectionItem(context);
 
             if (item == null)
             {
-                throw new XmlSerializationException(string.Format("XML contract of \"{0}\" must contains item info", context.ValueType));
+                throw new XmlSerializationException($"XML contract of \"{context.ValueType}\" must contains item info");
             }
 
             var collectionProxy = this.CreateProxy(context.ValueType);

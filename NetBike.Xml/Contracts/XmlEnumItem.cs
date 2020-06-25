@@ -4,14 +4,11 @@
 
     public sealed class XmlEnumItem
     {
-        private readonly long value;
-        private readonly string name;
-
         public XmlEnumItem(long value, string name)
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             for (var i = 0; i < name.Length; i++)
@@ -24,18 +21,12 @@
                 }
             }
 
-            this.name = name;
-            this.value = value;
+            this.Name = name;
+            this.Value = value;
         }
 
-        public string Name
-        {
-            get { return this.name; }
-        }
+        public string Name { get; }
 
-        public long Value
-        {
-            get { return this.value; }
-        }
+        public long Value { get; }
     }
 }

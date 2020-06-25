@@ -2,10 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
-    using System.Text;
-    using System.Threading.Tasks;
 
     internal sealed class XmlConvertMethod
     {
@@ -24,7 +21,7 @@
         {
             if (settings == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException(nameof(settings));
             }
 
             throw new NotImplementedException();

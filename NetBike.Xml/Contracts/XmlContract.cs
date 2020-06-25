@@ -5,8 +5,6 @@
 
     public class XmlContract
     {
-        private readonly Type valueType;
-        private readonly XmlName name;
         private XmlMember root;
         private Func<object> creator;
 
@@ -14,27 +12,21 @@
         {
             if (valueType == null)
             {
-                throw new ArgumentNullException("valueType");
+                throw new ArgumentNullException(nameof(valueType));
             }
 
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
-            this.valueType = valueType;
-            this.name = name;
+            this.ValueType = valueType;
+            this.Name = name;
         }
 
-        public Type ValueType
-        {
-            get { return this.valueType; }
-        }
+        public Type ValueType { get; }
 
-        public XmlName Name
-        {
-            get { return this.name; }
-        }
+        public XmlName Name { get; }
 
         internal XmlMember Root
         {
@@ -53,7 +45,7 @@
         {
             if (this.creator == null)
             {
-                this.creator = DynamicWrapperFactory.CreateConstructor(this.valueType);
+                this.creator = DynamicWrapperFactory.CreateConstructor(this.ValueType);
             }
 
             return this.creator();
@@ -62,8 +54,8 @@
         protected virtual XmlMember GetDefaultMember()
         {
             return new XmlMember(
-                this.valueType,
-                this.name,
+                this.ValueType,
+                this.Name,
                 XmlMappingType.Element,
                 XmlTypeHandling.None,
                 XmlNullValueHandling.Include,

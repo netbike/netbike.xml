@@ -21,7 +21,7 @@
         {
             if (nameResolver == null)
             {
-                throw new ArgumentNullException("nameResolver");
+                throw new ArgumentNullException(nameof(nameResolver));
             }
 
             this.ignoreSystemAttributes = ignoreSystemAttributes;
@@ -32,7 +32,7 @@
         {
             if (valueType == null)
             {
-                throw new ArgumentNullException("valueType");
+                throw new ArgumentNullException(nameof(valueType));
             }
 
             var name = this.ResolveContractName(valueType);
@@ -62,12 +62,12 @@
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             if (name.Length == 0)
             {
-                throw new ArgumentException("Name is empty.", "name");
+                throw new ArgumentException("Name is empty.", nameof(name));
             }
 
             return new XmlName(this.GetLocalName(name));

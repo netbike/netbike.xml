@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>NetBike.Xml.Formatting</id>
-        <version>0.4.0</version>
+        <version>0.6.0</version>
         <title>NetBike.Xml.Formatting</title>
         <authors>Pavel Shkarin</authors>
         <licenseUrl>https://github.com/netbike/netbike.xml/blob/master/LICENSE</licenseUrl>
@@ -12,10 +12,12 @@
         <summary />
         <tags>XML webapi formatter mediatypeformatter</tags>
         <dependencies>
-            <dependency id="NetBike.Xml" version="0.4.0" />
+			<group targetFramework="netstandard2.0" >
+				<dependency id="NetBike.Xml" version="0.6.0" />
+			</group>
         </dependencies>
     </metadata>
     <files>
-        <file src="NetBike.Xml.Formatting\bin\Release\NetBike.Xml.Formatting.dll" target="lib\net40-client\NetBike.Xml.Formatting.dll" />
+        <file src="NetBike.Xml.Formatting\bin\Release\netstandard2.0\NetBike.Xml.Formatting.dll" target="lib\netstandard2.0\NetBike.Xml.Formatting.dll" />
     </files>
 </package>

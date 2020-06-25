@@ -40,7 +40,7 @@
             }
             else if (dateTime.Kind == DateTimeKind.Local)
             {
-                var utcOffset = TimeZone.CurrentTimeZone.GetUtcOffset(dateTime);
+                var utcOffset = TimeZoneInfo.Local.GetUtcOffset(dateTime);
 
                 if (utcOffset.Ticks > 0)
                 {

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using NetBike.Xml.Utilities;
 
     public sealed class XmlListConverter : XmlConverterFactory
     {
@@ -30,7 +29,7 @@
 
             private sealed class ListProxy : ICollectionProxy
             {
-                private List<TItem> items = new List<TItem>();
+                private readonly List<TItem> items = new List<TItem>();
 
                 public void Add(object value)
                 {

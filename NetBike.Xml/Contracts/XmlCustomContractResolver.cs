@@ -17,7 +17,7 @@
         {
             if (contracts == null)
             {
-                throw new ArgumentNullException("contracts");
+                throw new ArgumentNullException(nameof(contracts));
             }
 
             this.fallbackResolver = fallbackResolver;
@@ -29,25 +29,20 @@
             }
         }
 
-        public IEnumerable<XmlContract> Contracts
-        {
-            get { return this.contracts.Values; }
-        }
+        public IEnumerable<XmlContract> Contracts => this.contracts.Values;
 
         public XmlContract ResolveContract(Type valueType)
         {
             if (valueType == null)
             {
-                throw new ArgumentNullException("valueType");
+                throw new ArgumentNullException(nameof(valueType));
             }
 
-            XmlContract contract;
-
-            if (!this.contracts.TryGetValue(valueType, out contract))
+            if (!this.contracts.TryGetValue(valueType, out var contract))
             {
                 if (this.fallbackResolver == null)
                 {
-                    throw new XmlSerializationException(string.Format("Can't resolve contract for \"{0}\".", valueType));
+                    throw new XmlSerializationException($"Can't resolve contract for \"{valueType}\".");
                 }
 
                 contract = this.fallbackResolver.ResolveContract(valueType);

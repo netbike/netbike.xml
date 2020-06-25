@@ -2,18 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
-    using NetBike.Xml.Contracts.Builders;
-    using NetBike.Xml.Utilities;
 
     public sealed partial class XmlObjectContract : XmlContract
     {
         private static readonly List<XmlProperty> EmptyProperties = new List<XmlProperty>();
 
-        private readonly XmlTypeHandling? typeHandling;
-        private readonly XmlItem item;
         private readonly List<XmlProperty> properties;
-        private readonly bool hasRequiredOrDefaultsProperties;
-        private readonly XmlProperty innerTextProperty;
 
         public XmlObjectContract(
             Type valueType,
@@ -30,8 +24,8 @@
                 properties = EmptyProperties;
             }
 
-            this.item = item;
-            this.typeHandling = typeHandling;
+            this.Item = item;
+            this.TypeHandling = typeHandling;
             this.properties = new List<XmlProperty>(properties);
 
             foreach (var property in this.properties)
@@ -48,7 +42,7 @@
 
                 if (property.IsRequired || property.DefaultValue != null)
                 {
-                    this.hasRequiredOrDefaultsProperties = true;
+                    this.HasRequiredOrDefaultsProperties = true;
                 }
 
                 if (property.MappingType == XmlMappingType.Element)
@@ -57,16 +51,16 @@
                 }
                 else if (property.MappingType == XmlMappingType.InnerText)
                 {
-                    if (this.innerTextProperty != null)
+                    if (this.InnerTextProperty != null)
                     {
                         throw new XmlSerializationException("Contract must have only one innerText property.");
                     }
 
-                    this.innerTextProperty = property;
+                    this.InnerTextProperty = property;
                 }
             }
 
-            if (this.innerTextProperty != null && elementCount > 0)
+            if (this.InnerTextProperty != null && elementCount > 0)
             {
                 throw new XmlSerializationException("Contract must not contain elements, if it contains innerText property.");
             }
@@ -74,42 +68,27 @@
             this.properties.Sort(XmlPropertyComparer.Instance);
         }
 
-        public IReadOnlyList<XmlProperty> Properties
-        {
-            get { return this.properties; }
-        }
+        public IReadOnlyList<XmlProperty> Properties => this.properties;
 
-        public XmlItem Item
-        {
-            get { return this.item; }
-        }
+        public XmlItem Item { get; }
 
-        public XmlTypeHandling? TypeHandling
-        {
-            get { return this.typeHandling; }
-        }
+        public XmlTypeHandling? TypeHandling { get; }
 
-        internal bool HasRequiredOrDefaultsProperties
-        {
-            get { return this.hasRequiredOrDefaultsProperties; }
-        }
+        internal bool HasRequiredOrDefaultsProperties { get; }
 
-        internal XmlProperty InnerTextProperty
-        {
-            get { return this.innerTextProperty; }
-        }
-        
+        internal XmlProperty InnerTextProperty { get; }
+
         protected override XmlMember GetDefaultMember()
         {
             return new XmlMember(
                 this.ValueType,
                 this.Name,
                 XmlMappingType.Element,
-                this.typeHandling,
+                this.TypeHandling,
                 null,
                 null,
                 null,
-                this.item);
+                this.Item);
         }
     }
 }
