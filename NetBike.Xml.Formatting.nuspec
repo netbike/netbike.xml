@@ -14,6 +14,9 @@
         <dependencies>
 			<group targetFramework="netstandard2.0" >
 				<dependency id="NetBike.Xml" version="0.6.0" />
+				<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.7" />
+				<dependency id="Newtonsoft.Json" version="12.0.3" />
+				<dependency id="System.Net.Http" version="4.3.4" />
 			</group>
         </dependencies>
     </metadata>
