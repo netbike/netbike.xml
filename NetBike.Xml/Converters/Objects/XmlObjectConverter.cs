@@ -1,11 +1,8 @@
 ﻿namespace NetBike.Xml.Converters.Objects
 {
     using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
-using NetBike.Xml.Contracts;
-using NetBike.Xml.Converters.Collections;
+    using System.Xml;
+    using NetBike.Xml.Contracts;
 
     public class XmlObjectConverter : IXmlConverter
     {
@@ -28,7 +25,7 @@ using NetBike.Xml.Converters.Collections;
 
             if (context.Member.MappingType != XmlMappingType.Element)
             {
-                throw new XmlSerializationException(string.Format("XML mapping of \"{0}\" must be Element.", context.ValueType));
+                throw new XmlSerializationException($"XML mapping of \"{context.ValueType}\" must be Element.");
             }
 
             var target = value;
@@ -56,7 +53,7 @@ using NetBike.Xml.Converters.Collections;
         {
             if (context.Member.MappingType != XmlMappingType.Element)
             {
-                throw new XmlSerializationException(string.Format("XML mapping of \"{0}\" must be Element.", context.ValueType));
+                throw new XmlSerializationException($"XML mapping of \"{context.ValueType}\" must be Element.");
             }
 
             var contract = context.Contract.ToObjectContract();
@@ -187,7 +184,7 @@ using NetBike.Xml.Converters.Collections;
                     }
                     else if (property.IsRequired)
                     {
-                        throw new XmlSerializationException(string.Format("Property \"{0}\" of type \"{1}\" is required.", property.PropertyName, contract.ValueType));
+                        throw new XmlSerializationException($"Property \"{property.PropertyName}\" of type \"{contract.ValueType}\" is required.");
                     }
                 }
                 else if (propertyState.CollectionProxy != null)

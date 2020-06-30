@@ -2,18 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq.Expressions;
     using System.Reflection;
-    using NetBike.Xml.Contracts.Builders;
     using NetBike.Xml.Utilities;
 
     public class XmlProperty : XmlMember
     {
-        private readonly bool isRequired;
-        private readonly int order;
-        private readonly PropertyInfo propertyInfo;
-        private readonly bool hasGetterAndSetter;
-        private readonly bool isCollection;
         private Action<object, object> setter;
         private Func<object, object> getter;
 
@@ -39,50 +32,32 @@
                     throw new ArgumentException("Collection flag is available only for the IEnumerable type.");
                 }
 
-                this.isCollection = true;
+                this.IsCollection = true;
             }
 
-            this.propertyInfo = propertyInfo;
-            this.isRequired = isRequired;
-            this.order = order;
-            this.hasGetterAndSetter = propertyInfo.CanRead && propertyInfo.CanWrite;
+            this.PropertyInfo = propertyInfo;
+            this.IsRequired = isRequired;
+            this.Order = order;
+            this.HasGetterAndSetter = propertyInfo.CanRead && propertyInfo.CanWrite;
         }
 
-        public PropertyInfo PropertyInfo
-        {
-            get { return this.propertyInfo; }
-        }
+        public PropertyInfo PropertyInfo { get; }
 
-        public string PropertyName
-        {
-            get { return this.propertyInfo.Name; }
-        }
+        public string PropertyName => this.PropertyInfo.Name;
 
-        public bool IsRequired
-        {
-            get { return this.isRequired; }
-        }
+        public bool IsRequired { get; }
 
-        public bool IsCollection
-        {
-            get { return this.isCollection; }
-        }
+        public bool IsCollection { get; }
 
-        public int Order
-        {
-            get { return this.order; }
-        }
+        public int Order { get; }
 
-        internal bool HasGetterAndSetter
-        {
-            get { return this.hasGetterAndSetter; }
-        }
-        
+        internal bool HasGetterAndSetter { get; }
+
         internal object GetValue(object target)
         {
             if (this.getter == null)
             {
-                this.getter = DynamicWrapperFactory.CreateGetter(this.propertyInfo);
+                this.getter = DynamicWrapperFactory.CreateGetter(this.PropertyInfo);
             }
 
             return this.getter(target);
@@ -92,7 +67,7 @@
         {
             if (this.setter == null)
             {
-                this.setter = DynamicWrapperFactory.CreateSetter(this.propertyInfo);
+                this.setter = DynamicWrapperFactory.CreateSetter(this.PropertyInfo);
             }
 
             this.setter(target, value);

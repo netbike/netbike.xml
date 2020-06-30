@@ -10,14 +10,14 @@
         {
             if (contract == null)
             {
-                throw new ArgumentNullException("contract");
+                throw new ArgumentNullException(nameof(contract));
             }
 
             var valueType = contract.ValueType;
 
             if (!this.AcceptType(valueType))
             {
-                throw new ArgumentException(string.Format("Type \"{0}\" is not acceptable.", valueType), "contract");
+                throw new ArgumentException($"Type \"{valueType}\" is not acceptable.", nameof(contract));
             }
 
             var converterType = this.GetConverterType(valueType);

@@ -98,10 +98,7 @@
 
         public bool OmitXmlDeclaration
         {
-            get
-            {
-                return this.omitXmlDeclaration;
-            }
+            get => this.omitXmlDeclaration;
 
             set
             {
@@ -112,10 +109,7 @@
 
         public bool Indent
         {
-            get
-            {
-                return this.indent;
-            }
+            get => this.indent;
 
             set
             {
@@ -126,16 +120,13 @@
 
         public string IndentChars
         {
-            get
-            {
-                return this.indentChars;
-            }
+            get => this.indentChars;
 
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.indentChars = value;
@@ -145,16 +136,13 @@
 
         public XmlName TypeAttributeName
         {
-            get
-            {
-                return this.typeAttributeName;
-            }
+            get => this.typeAttributeName;
 
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.typeAttributeName = value;
@@ -163,16 +151,13 @@
 
         public XmlName NullAttributeName
         {
-            get
-            {
-                return this.nullAttributeName;
-            }
+            get => this.nullAttributeName;
 
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.nullAttributeName = value;
@@ -181,34 +166,20 @@
 
         public CultureInfo Culture
         {
-            get
-            {
-                return this.cultureInfo;
-            }
+            get => this.cultureInfo;
 
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.cultureInfo = value;
-            }
+            set => this.cultureInfo = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public IXmlTypeResolver TypeResolver
         {
-            get
-            {
-                return this.typeResolver;
-            }
+            get => this.typeResolver;
 
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.typeResolver = value;
@@ -218,16 +189,13 @@
 
         public IXmlContractResolver ContractResolver
         {
-            get
-            {
-                return this.contractResolver;
-            }
+            get => this.contractResolver;
 
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.contractResolver = value;
@@ -237,16 +205,13 @@
 
         public Encoding Encoding
         {
-            get
-            {
-                return this.encoding;
-            }
+            get => this.encoding;
 
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.encoding = value;
@@ -254,15 +219,9 @@
             }
         }
 
-        public ICollection<XmlNamespace> Namespaces
-        {
-            get { return this.namespaces; }
-        }
+        public ICollection<XmlNamespace> Namespaces => this.namespaces;
 
-        public ICollection<IXmlConverter> Converters
-        {
-            get { return this.converters; }
-        }
+        public ICollection<IXmlConverter> Converters => this.converters;
 
         internal XmlWriterSettings GetWriterSettings()
         {
@@ -307,9 +266,7 @@
 
         internal XmlTypeContext GetTypeContext(Type valueType)
         {
-            XmlTypeContext context;
-
-            if (!this.typeContextCache.TryGetValue(valueType, out context))
+            if (!this.typeContextCache.TryGetValue(valueType, out var context))
             {
                 context = this.CreateTypeContext(valueType, context);
             }
@@ -324,9 +281,7 @@
                 return null;
             }
 
-            var factory = converter as IXmlConverterFactory;
-
-            if (factory != null)
+            if (converter is IXmlConverterFactory factory)
             {
                 converter = factory.CreateConverter(contract);
             }

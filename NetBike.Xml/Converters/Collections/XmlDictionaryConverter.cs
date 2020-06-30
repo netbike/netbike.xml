@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using NetBike.Xml.Utilities;
 
     public sealed class XmlDictionaryConverter : XmlConverterFactory
     {
@@ -30,7 +29,7 @@
 
             private sealed class DictionaryProxy : ICollectionProxy
             {
-                private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
+                private readonly Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
 
                 public void Add(object value)
                 {

@@ -13,7 +13,7 @@
         {
             if (valueType == null)
             {
-                throw new ArgumentNullException("valueType");
+                throw new ArgumentNullException(nameof(valueType));
             }
 
             return valueType.FullName;
@@ -23,7 +23,7 @@
         {
             if (typeName == null)
             {
-                throw new ArgumentNullException("typeName");
+                throw new ArgumentNullException(nameof(typeName));
             }
 
             Type actualType;
@@ -40,7 +40,8 @@
 
                     if (rootType != null && !rootType.IsAssignableFrom(actualType))
                     {
-                        throw new XmlTypeResolveException(string.Format("Resolved type \"{0}\" is not assignable from \"{1}\"", actualType, rootType));
+                        throw new XmlTypeResolveException(
+                            $"Resolved type \"{actualType}\" is not assignable from \"{rootType}\"");
                     }
                 }
             }
@@ -56,7 +57,7 @@
         {
             if (typeName == null)
             {
-                throw new ArgumentNullException("typeName");
+                throw new ArgumentNullException(nameof(typeName));
             }
 
             Type type = null;
@@ -84,7 +85,7 @@
 
             if (type == null)
             {
-                throw new XmlTypeResolveException(string.Format("Error at resolve type \"{0}\".", typeName));
+                throw new XmlTypeResolveException($"Error at resolve type \"{typeName}\".");
             }
 
             return type;

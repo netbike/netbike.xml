@@ -1,21 +1,15 @@
 ﻿namespace NetBike.Xml.Converters.Basics
 {
     using System;
-    using System.Xml;
 
     public sealed class XmlGuidConverter : XmlBasicRawConverter<Guid>
     {
-        private readonly string format;
-
         public XmlGuidConverter(string format = null)
         {
-            this.format = format;
+            this.Format = format;
         }
 
-        public string Format
-        {
-            get { return this.format; }
-        }
+        public string Format { get; }
 
         protected override Guid Parse(string value, XmlSerializationContext context)
         {
@@ -24,7 +18,7 @@
 
         protected override string ToString(Guid value, XmlSerializationContext context)
         {
-            return value.ToString(this.format);
+            return value.ToString(this.Format);
         }
     }
 }

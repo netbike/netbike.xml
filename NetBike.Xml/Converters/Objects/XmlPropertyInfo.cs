@@ -34,7 +34,8 @@
 
                     if (collectionConverter == null)
                     {
-                        throw new XmlSerializationException(string.Format("Readable collection converter for the type \"{0}\" is not found.", property.ValueType));
+                        throw new XmlSerializationException(
+                            $"Readable collection converter for the type \"{property.ValueType}\" is not found.");
                     }
 
                     var item = property.Item ?? typeContext.Contract.Root;

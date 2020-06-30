@@ -14,7 +14,7 @@
         {
             if (items == null)
             {
-                throw new ArgumentNullException("items");
+                throw new ArgumentNullException(nameof(items));
             }
 
             foreach (var item in items)
@@ -45,10 +45,7 @@
 
         private void OnCollectionChanged()
         {
-            if (this.CollectionChanged != null)
-            {
-                this.CollectionChanged(this, new EventArgs());
-            }
+            CollectionChanged?.Invoke(this, new EventArgs());
         }
     }
 }

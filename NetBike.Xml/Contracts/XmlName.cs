@@ -5,9 +5,6 @@
 
     public sealed class XmlName : IEquatable<XmlName>
     {
-        private readonly string localName;
-        private readonly string namespaceUri;
-
         public XmlName(string localName)
             : this(localName, null)
         {
@@ -17,7 +14,7 @@
         {
             if (localName == null)
             {
-                throw new ArgumentNullException("localName");
+                throw new ArgumentNullException(nameof(localName));
             }
 
             XmlConvert.VerifyNCName(localName);
@@ -27,19 +24,13 @@
                 XmlNamespace.VerifyNamespaceUri(namespaceUri);
             }
 
-            this.localName = localName;
-            this.namespaceUri = namespaceUri;
+            this.LocalName = localName;
+            this.NamespaceUri = namespaceUri;
         }
 
-        public string LocalName
-        {
-            get { return this.localName; }
-        }
+        public string LocalName { get; }
 
-        public string NamespaceUri
-        {
-            get { return this.namespaceUri; }
-        }
+        public string NamespaceUri { get; }
 
         public static implicit operator XmlName(string name)
         {
@@ -48,12 +39,12 @@
 
         public override string ToString()
         {
-            if (this.namespaceUri != null)
+            if (this.NamespaceUri != null)
             {
-                return "{" + this.namespaceUri + "}" + this.localName;
+                return "{" + this.NamespaceUri + "}" + this.LocalName;
             }
 
-            return this.localName;
+            return this.LocalName;
         }
 
         public override bool Equals(object obj)
@@ -67,11 +58,11 @@
 
             unchecked
             {
-                hashCode = 31 * hashCode + this.localName.GetHashCode();
+                hashCode = 31 * hashCode + this.LocalName.GetHashCode();
 
-                if (this.namespaceUri != null)
+                if (this.NamespaceUri != null)
                 {
-                    hashCode = 31 * hashCode + this.namespaceUri.GetHashCode();
+                    hashCode = 31 * hashCode + this.NamespaceUri.GetHashCode();
                 }
             }
 
@@ -85,19 +76,19 @@
                 return false;
             }
 
-            return this.localName == other.localName && this.namespaceUri == other.namespaceUri;
+            return this.LocalName == other.LocalName && this.NamespaceUri == other.NamespaceUri;
         }
 
         internal XmlName Create(string localName, string namespaceUri)
         {
             if (string.IsNullOrEmpty(localName))
             {
-                localName = this.localName;
+                localName = this.LocalName;
             }
 
             if (string.IsNullOrEmpty(namespaceUri))
             {
-                namespaceUri = this.namespaceUri;
+                namespaceUri = this.NamespaceUri;
             }
 
             return new XmlName(localName, namespaceUri);

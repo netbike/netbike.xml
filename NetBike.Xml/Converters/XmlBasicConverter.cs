@@ -1,6 +1,5 @@
 ﻿namespace NetBike.Xml.Converters
 {
-    using System;
     using System.Xml;
 
     public abstract class XmlBasicConverter<T> : XmlConverter<T>
