@@ -6,6 +6,17 @@
     <Company>NetBike</Company>
     <Product>NetBike.Xml</Product>
     <Copyright>Copyright © NetBike 2015</Copyright>
+    <Product>NetBike.Xml</Product>
+    <Description>Fast, flexible and high customizable XML serializer for converting between .NET objects and XML.</Description>
+    <AssemblyVersion>0.6.0.0</AssemblyVersion>
+    <Version>0.6.0</Version>
+    <Authors>NetBike</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/netbike/netbike.xml</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/netbike/netbike.xml.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>XML serializer serialization</PackageTags>
+    <PackageId>NetBike.Xml</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />

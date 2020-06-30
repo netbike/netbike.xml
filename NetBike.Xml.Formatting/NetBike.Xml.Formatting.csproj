@@ -6,6 +6,17 @@
     <Company>NetBike</Company>
     <Product>NetBike.Xml.Formatting</Product>
     <Copyright>Copyright © NetBike 2015</Copyright>
+    <Product>NetBike.Xml.Formatting</Product>
+    <Description>Fast, flexible and high customizable XML formatter for Web API.</Description>
+    <AssemblyVersion>0.6.0.0</AssemblyVersion>
+    <Version>0.6.0</Version>
+    <Authors>NetBike</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/netbike/netbike.xml</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/netbike/netbike.xml.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>XML webapi formatter mediatypeformatter</PackageTags>
+    <PackageId>NetBike.Xml.Formatting</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
