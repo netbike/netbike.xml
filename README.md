@@ -1,6 +1,9 @@
 NetBike.Xml
 ============
 
+[![Build Status](https://cloud.drone.io/api/badges/netbike/netbike.xml/status.svg)](https://cloud.drone.io/netbike/netbike.xml)
+[![NuGet](https://img.shields.io/nuget/v/NetBike.Xml)](https://www.nuget.org/packages/NetBike.Xml)
+
 Fast, flexible and high customizable XML serializer for converting between .NET objects and XML.
 
 * Flexible model of contracts via IXmlContractResolver
@@ -8,7 +11,7 @@ Fast, flexible and high customizable XML serializer for converting between .NET 
 * Built-in support for the Nullable<>, List<>, Dictionary<> and more
 * Supports for base and derived types via IXmlTypeResolver
 * Compatibility with XML attributes of System.Xml.XmlSerializer
-* .NET 4
+* .NET Standart 2.0
 
 Install
 -------
