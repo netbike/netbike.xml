@@ -108,6 +108,16 @@
             Assert.AreEqual(expected, actual.Value);
         }
 
+        [Test]
+        public void ReadNullWithNullIncludeHandlingTestUpperCase()
+        {
+            var serializer = new XmlSerializer();
+            var xml = @"<TestClass><Value xsi:nil=""true"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" /></TestClass>";
+            var actual = serializer.ParseXml<TestClass>(xml);
+            int? expected = null;
+            Assert.AreEqual(expected, actual.Value);
+        }
+
         private static XmlMember GetAttributeMember<T>()
         {
             return new XmlMember(typeof(T), "value", XmlMappingType.Attribute);
