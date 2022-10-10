@@ -158,5 +158,11 @@
             builder.IsCollection = isCollection;
             return builder;
         }
+
+        public static XmlPropertyBuilder SetDataType(this XmlPropertyBuilder builder, string dataType)
+        {
+            builder.DataType = dataType;
+            return builder;
+        }
     }
 }

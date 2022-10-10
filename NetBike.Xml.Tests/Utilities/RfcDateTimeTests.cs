@@ -8,31 +8,41 @@
     public class RfcDateTimeTests
     {
         [Test]
-        public void ToStringUtcDateTest()
+        public void ToStringUtcDateTimeTest()
         {
             var value = new DateTime(2013, 09, 12, 12, 58, 48, DateTimeKind.Utc).AddTicks(2449990);
             var expected = "2013-09-12T12:58:48.244999Z";
-            var actual = RfcDateTime.ToString(value);
+            var actual = RfcDateTime.ToDateTimeString(value);
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void ToStringUnspecifiedDateTest()
+        public void ToStringUnspecifiedDateTimeTest()
         {
             var value = new DateTime(2013, 09, 12, 12, 58, 48);
             var expected = "2013-09-12T12:58:48";
-            var actual = RfcDateTime.ToString(value);
+            var actual = RfcDateTime.ToDateTimeString(value);
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void ToStringLocalDateTest()
+        public void ToStringLocalDateTimeTest()
         {
             var expected = new DateTime(2016, 11, 12, 12, 58, 48, DateTimeKind.Local);
-            var value = RfcDateTime.ToString(expected);
+            var value = RfcDateTime.ToDateTimeString(expected);
             var actual = RfcDateTime.ParseDateTime(value);
 
             Assert.AreEqual(expected, actual.ToLocalTime());
+        }
+        
+        [Test]
+        public void ToStringDateTest()
+        {
+            var expected = new DateTime(2016, 11, 12, 12, 58, 48);
+            var value = RfcDateTime.ToDateString(expected);
+            var actual = RfcDateTime.ParseDate(value);
+
+            Assert.AreEqual(expected.Date, actual);
         }
 
         [TestCase("2013-09-12T12:58:48.2449990Z")]
@@ -66,6 +76,14 @@
         {
             var expected = DateTime.Parse(value);
             var actual = RfcDateTime.ParseDateTime(value);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("2013-09-12")]
+        public void ParseDate(string value)
+        {
+            var expected = DateTime.Parse(value);
+            var actual = RfcDateTime.ParseDate(value);
             Assert.AreEqual(expected, actual);
         }
     }

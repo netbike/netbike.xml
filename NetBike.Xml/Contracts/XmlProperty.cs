@@ -22,8 +22,9 @@
             XmlItem item = null,
             IEnumerable<XmlKnownType> knownTypes = null,
             bool isCollection = false,
-            int order = -1)
-            : base(propertyInfo.PropertyType, name, mappingType, typeHandling, nullValueHandling, defaultValueHandling, defaultValue, item, knownTypes)
+            int order = -1,
+            string dataType = null)
+            : base(propertyInfo.PropertyType, name, mappingType, typeHandling, nullValueHandling, defaultValueHandling, defaultValue, item, knownTypes, dataType)
         {
             if (isCollection)
             {

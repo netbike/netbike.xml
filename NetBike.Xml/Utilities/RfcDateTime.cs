@@ -9,7 +9,21 @@
     /// </summary>
     internal static class RfcDateTime
     {
-        public static string ToString(DateTime dateTime)
+        public static string ToDateString(DateTime dateTime)
+        {
+            var builder = new StringBuilder(9);
+
+            builder
+                .Append4(dateTime.Year)
+                .Append('-')
+                .Append2(dateTime.Month)
+                .Append('-')
+                .Append2(dateTime.Day);
+
+            return builder.ToString();
+        }
+
+        public static string ToDateTimeString(DateTime dateTime)
         {
             var builder = new StringBuilder(35);
 
@@ -62,9 +76,7 @@
 
         public static DateTime ParseDateTime(string value)
         {
-            DateTime result;
-
-            if (!TryParseDateTime(value, out result))
+            if (!TryParseDateTime(value, out var result))
             {
                 throw new FormatException("Invalid ISO-8601 DateTime.");
             }
@@ -86,17 +98,11 @@
                 return false;
             }
 
-            int year;
-            int month;
-            int day;
-            int hour;
-            int minute;
-
-            if (!TryParseYear(value, 0, 4, out year) ||
-                !TryParseMonth(value, 5, 2, out month) ||
-                !TryParseDay(value, 8, 2, out day) ||
-                !TryParseHours(value, 11, 2, out hour) ||
-                !TryParseMinute(value, 14, 2, out minute))
+            if (!TryParseYear(value, 0, 4, out var year) ||
+                !TryParseMonth(value, 5, 2, out var month) ||
+                !TryParseDay(value, 8, 2, out var day) ||
+                !TryParseHours(value, 11, 2, out var hour) ||
+                !TryParseMinute(value, 14, 2, out var minute))
             {
                 return false;
             }
@@ -125,9 +131,7 @@
                 return false;
             }
 
-            int second;
-
-            if (!TryParseSecond(value, 17, 2, out second))
+            if (!TryParseSecond(value, 17, 2, out var second))
             {
                 return false;
             }
@@ -154,9 +158,7 @@
                     index++;
                 }
 
-                int ticks;
-
-                if (!TryParseTicks(value, 20, index - 20, out ticks))
+                if (!TryParseTicks(value, 20, index - 20, out var ticks))
                 {
                     return false;
                 }
@@ -175,6 +177,41 @@
                 result = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc).AddMinutes(-1 * (int)tzd).AddTicks(ticks);
             }
 
+            return true;
+        }
+        
+        public static DateTime ParseDate(string value)
+        {
+            if (!TryParseDate(value, out var result))
+            {
+                throw new FormatException("Invalid Date.");
+            }
+
+            return result;
+        }
+
+        public static bool TryParseDate(string value, out DateTime result)
+        {
+            result = DateTime.MinValue;
+
+            if (string.IsNullOrEmpty(value) || value.Length < 10)
+            {
+                return false;
+            }
+
+            if (value[4] != '-' || value[7] != '-')
+            {
+                return false;
+            }
+
+            if (!TryParseYear(value, 0, 4, out var year) ||
+                !TryParseMonth(value, 5, 2, out var month) ||
+                !TryParseDay(value, 8, 2, out var day))
+            {
+                return false;
+            }
+            
+            result = new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Unspecified);
             return true;
         }
 
@@ -216,13 +253,10 @@
                 return true;
             }
 
-            int hour;
-            int minutes;
-
             if (count != 6 ||
                 value[offset + 3] != ':' ||
-                !TryParseHours(value, offset + 1, 2, out hour) ||
-                !TryParseMinute(value, offset + 4, 2, out minutes))
+                !TryParseHours(value, offset + 1, 2, out var hour) ||
+                !TryParseMinute(value, offset + 4, 2, out var minutes))
             {
                 tzd = -1;
                 return false;

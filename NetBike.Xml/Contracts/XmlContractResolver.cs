@@ -204,7 +204,8 @@
                         propertyBuilder.SetName(name)
                             .SetMappingType(XmlMappingType.Element)
                             .SetNullable(attribute.IsNullable)
-                            .SetOrder(attribute.Order);
+                            .SetOrder(attribute.Order)
+                            .SetDataType(attribute.DataType);
                     }
                     else if (propertyType.IsAssignableFrom(attribute.Type))
                     {
