@@ -1,5 +1,6 @@
 ﻿namespace NetBike.Xml.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
     using NetBike.Xml.Contracts;
@@ -344,6 +345,38 @@
             serializer.Settings.TypeHandling = XmlTypeHandling.None;
             var actual = serializer.ToXml(value);
             var expected = @"<fooContainer xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><foo><id>1</id></foo></fooContainer>";
+
+            Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
+        }
+
+        [Test]
+        public void DeserializeDateTimeTest()
+        {
+            var xml = @"<fooDateTime xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><DateTimeValue>2011-11-10T01:02:03</DateTimeValue><DateValue>2011-11-10</DateValue></fooDateTime>";
+            var expected = new FooDateTime
+            {
+                DateValue = new DateTime(2011, 11, 10),
+                DateTimeValue = new DateTime(2011, 11, 10, 1, 2, 3)
+            };
+
+            var actual = GetSerializer().ParseXml<FooDateTime>(xml);
+
+            Assert.AreEqual(expected, actual);
+        }
+        
+        [Test]
+        public void SerializeDateTimeTest()
+        {
+            var value = new FooDateTime
+            {
+                DateValue = new DateTime(2011, 11, 10),
+                DateTimeValue = new DateTime(2011, 11, 10, 1, 2, 3)
+            };
+            
+            var serializer = GetSerializer();
+            var actual = serializer.ToXml(value);
+            var expected =
+                @"<fooDateTime xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><DateTimeValue>2011-11-10T01:02:03</DateTimeValue><DateValue>2011-11-10</DateValue></fooDateTime>";
 
             Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
         }

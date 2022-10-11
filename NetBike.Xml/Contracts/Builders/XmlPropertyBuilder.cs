@@ -48,7 +48,7 @@
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
 
             return new XmlPropertyBuilder(property.PropertyInfo)
@@ -62,6 +62,7 @@
                 IsRequired = property.IsRequired,
                 IsCollection = property.IsCollection,
                 Order = property.Order,
+                DataType = property.DataType,
                 Item = property.Item != null ? XmlItemBuilder.Create(property.Item) : null,
                 KnownTypes = property.KnownTypes != null ? XmlKnownTypeBuilderCollection.Create(property.KnownTypes) : null
             };
@@ -78,29 +79,30 @@
                 this.NullValueHandling,
                 this.DefaultValueHandling,
                 this.DefaultValue,
-                this.Item != null ? this.Item.Build() : null,
-                this.KnownTypes != null ? this.KnownTypes.Build() : null,
+                this.Item?.Build(),
+                this.KnownTypes?.Build(),
                 this.IsCollection,
-                this.Order);
+                this.Order,
+                this.DataType);
         }
 
         internal static PropertyInfo GetPropertyInfo(Type ownerType, string propertyName)
         {
             if (ownerType == null)
             {
-                throw new ArgumentNullException("ownerType");
+                throw new ArgumentNullException(nameof(ownerType));
             }
 
             if (propertyName == null)
             {
-                throw new ArgumentNullException("propertyName");
+                throw new ArgumentNullException(nameof(propertyName));
             }
 
             var propertyInfo = ownerType.GetProperty(propertyName);
 
             if (propertyInfo == null)
             {
-                throw new ArgumentException(string.Format("Property \"{0}\" is not declared in the type \"{1}\".", propertyName, ownerType), "propertyName");
+                throw new ArgumentException($"Property \"{propertyName}\" is not declared in the type \"{ownerType}\".", nameof(propertyName));
             }
 
             return propertyInfo;
@@ -110,12 +112,10 @@
         {
             if (expression == null)
             {
-                throw new ArgumentNullException("expression");
+                throw new ArgumentNullException(nameof(expression));
             }
 
-            var memberExpression = expression.Body as MemberExpression;
-
-            if (memberExpression == null)
+            if (!(expression.Body is MemberExpression memberExpression))
             {
                 throw new ArgumentException("Expected property expression.");
             }

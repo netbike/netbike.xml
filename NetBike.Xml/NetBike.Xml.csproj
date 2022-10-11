@@ -8,8 +8,8 @@
     <Copyright>Copyright © NetBike 2015</Copyright>
     <Product>NetBike.Xml</Product>
     <Description>Fast, flexible and high customizable XML serializer for converting between .NET objects and XML.</Description>
-    <AssemblyVersion>0.6.0.0</AssemblyVersion>
-    <Version>0.6.0</Version>
+    <AssemblyVersion>0.6.1.0</AssemblyVersion>
+    <Version>0.6.1</Version>
     <Authors>NetBike</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/netbike/netbike.xml</PackageProjectUrl>

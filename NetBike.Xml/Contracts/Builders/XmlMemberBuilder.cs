@@ -8,7 +8,7 @@
         {
             if (valueType == null)
             {
-                throw new ArgumentNullException("valueType");
+                throw new ArgumentNullException(nameof(valueType));
             }
 
             this.ValueType = valueType;
@@ -19,5 +19,7 @@
         public XmlName Name { get; set; }
 
         public XmlTypeHandling? TypeHandling { get; set; }
+        
+        public string DataType { get; set; }
     }
 }

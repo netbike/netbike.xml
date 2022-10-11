@@ -19,7 +19,8 @@
             XmlDefaultValueHandling? defaultValueHandling = null,
             object defaultValue = null,
             XmlItem item = null,
-            IEnumerable<XmlKnownType> knownTypes = null)
+            IEnumerable<XmlKnownType> knownTypes = null,
+            string dataType = null)
         {
             if (valueType == null)
             {
@@ -42,6 +43,7 @@
             this.Item = item;
             this.NullValueHandling = nullValueHandling;
             this.MappingType = mappingType;
+            this.DataType = dataType;
 
             if (knownTypes != null)
             {
@@ -98,6 +100,8 @@
         public XmlItem Item { get; }
 
         public IReadOnlyList<XmlKnownType> KnownTypes => this.knownTypes ?? EmptyKnownTypes;
+        
+        public string DataType { get; }
 
         internal bool IsOpenType { get; }
 
