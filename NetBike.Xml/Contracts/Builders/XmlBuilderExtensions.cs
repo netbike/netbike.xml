@@ -16,6 +16,13 @@
             builder.TypeHandling = typeHandling;
             return builder;
         }
+        
+        public static TBuilder SetDataType<TBuilder>(this TBuilder builder, string dataType)
+            where TBuilder : XmlMemberBuilder
+        {
+            builder.DataType = dataType;
+            return builder;
+        }
 
         public static TBuilder SetKnownType<TBuilder>(this TBuilder builder, Type valueType, XmlName name = null)
             where TBuilder : XmlItemBuilder
@@ -156,12 +163,6 @@
         public static XmlPropertyBuilder SetCollection(this XmlPropertyBuilder builder, bool isCollection = true)
         {
             builder.IsCollection = isCollection;
-            return builder;
-        }
-
-        public static XmlPropertyBuilder SetDataType(this XmlPropertyBuilder builder, string dataType)
-        {
-            builder.DataType = dataType;
             return builder;
         }
     }

@@ -32,8 +32,6 @@
 
         public bool IsRequired { get; set; }
 
-        public string DataType { get; set; }
-
         public static XmlPropertyBuilder Create(Type ownerType, string propertyName)
         {
             var propertyInfo = GetPropertyInfo(ownerType, propertyName);

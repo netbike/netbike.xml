@@ -243,14 +243,17 @@
                     if (attribute.Type == null || attribute.Type == propertyType)
                     {
                         var name = propertyName.Create(attribute.AttributeName, attribute.Namespace);
-                        propertyBuilder.SetName(name).SetMappingType(XmlMappingType.Attribute);
+                        propertyBuilder.SetName(name)
+                            .SetMappingType(XmlMappingType.Attribute)
+                            .SetDataType(attribute.DataType);
                         break;
                     }
                 }
             }
             else if (attributes.Text != null)
             {
-                propertyBuilder.SetMappingType(XmlMappingType.InnerText);
+                propertyBuilder.SetMappingType(XmlMappingType.InnerText)
+                    .SetDataType(attributes.Text.DataType);
             }
             else if (attributes.Array != null)
             {
@@ -282,6 +285,8 @@
                     {
                         propertyBuilder.Item.SetKnownType(attribute.Type, name);
                     }
+
+                    propertyBuilder.Item.SetDataType(attribute.DataType);
                 }
             }
 
