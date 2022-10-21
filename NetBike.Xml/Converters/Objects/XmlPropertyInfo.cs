@@ -30,9 +30,8 @@
                 else
                 {
                     var typeContext = context.Settings.GetTypeContext(property.ValueType);
-                    var collectionConverter = typeContext.ReadConverter as XmlCollectionConverter;
 
-                    if (collectionConverter == null)
+                    if (!(typeContext.ReadConverter is XmlCollectionConverter collectionConverter))
                     {
                         throw new XmlSerializationException(
                             $"Readable collection converter for the type \"{property.ValueType}\" is not found.");

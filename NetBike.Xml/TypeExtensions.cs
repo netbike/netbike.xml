@@ -132,9 +132,7 @@
 
         public static string GetShortName(this Type type)
         {
-            string shortName;
-
-            if (!ShortNames.TryGetValue(type, out shortName))
+            if (!ShortNames.TryGetValue(type, out var shortName))
             {
                 if (type.IsArray)
                 {

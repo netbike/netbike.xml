@@ -83,7 +83,7 @@
         {
             var ownerType = typeof(XmlConvert);
 
-            var expected = ownerType.GetMethod("ToString", BindingFlags.Public | BindingFlags.Static, null, new Type[] { typeof(byte) }, null);
+            var expected = ownerType.GetMethod("ToString", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(byte) }, null);
             var actual = ownerType.GetStaticMethod("ToString", typeof(byte));
 
             Assert.AreEqual(expected, actual);
@@ -94,7 +94,7 @@
         {
             var ownerType = typeof(XmlWriter);
 
-            var expected = ownerType.GetMethod("WriteStartElement", BindingFlags.Public | BindingFlags.Instance, null, new Type[] { typeof(string), typeof(string) }, null);
+            var expected = ownerType.GetMethod("WriteStartElement", BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(string), typeof(string) }, null);
             var actual = ownerType.GetInstanceMethod("WriteStartElement", typeof(string), typeof(string));
 
             Assert.AreEqual(expected, actual);

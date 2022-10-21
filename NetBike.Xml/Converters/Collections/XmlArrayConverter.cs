@@ -29,7 +29,7 @@
 
             private sealed class ArrayProxy : ICollectionProxy
             {
-                private List<TItem> items = new List<TItem>();
+                private readonly List<TItem> items = new List<TItem>();
 
                 public void Add(object value)
                 {

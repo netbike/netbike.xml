@@ -16,16 +16,13 @@
         {
             if (items == null)
             {
-                throw new ArgumentNullException("items");
+                throw new ArgumentNullException(nameof(items));
             }
 
             this.items = new List<XmlEnumItem>(items);
         }
 
-        public int Count
-        {
-            get { return this.items.Count; }
-        }
+        public int Count => this.items.Count;
 
         public void Add(long value, string name)
         {
@@ -37,14 +34,14 @@
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             var index = this.IndexOf(item.Value);
 
             if (index != -1)
             {
-                throw new ArgumentException(string.Format("Enum item \"{0}\" allready registered.", item.Value), "item");
+                throw new ArgumentException($"Enum item \"{item.Value}\" already registered.", nameof(item));
             }
 
             this.items.Add(item);
@@ -54,7 +51,7 @@
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             var index = this.IndexOf(item.Value);

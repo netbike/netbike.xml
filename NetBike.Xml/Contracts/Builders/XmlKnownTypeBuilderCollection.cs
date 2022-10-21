@@ -17,16 +17,13 @@
         {
             if (items == null)
             {
-                throw new ArgumentNullException("items");
+                throw new ArgumentNullException(nameof(items));
             }
 
             this.items = new List<XmlKnownTypeBuilder>(items);
         }
 
-        public int Count
-        {
-            get { return this.items.Count; }
-        }
+        public int Count => this.items.Count;
 
         public void Add(Type valueType, XmlName name)
         {
@@ -38,24 +35,24 @@
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             var index = this.IndexOf(item.ValueType);
 
-            if (index == -1)
+            if (index != -1)
             {
-                throw new ArgumentException(string.Format("Known type \"{0}\" allready registered.", item.ValueType));
+                throw new ArgumentException($"Known type \"{item.ValueType}\" already registered.");
             }
 
-            this.Add(item);
+            this.items.Add(item);
         }
 
         public void Set(XmlKnownTypeBuilder item)
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             var index = this.IndexOf(item.ValueType);
@@ -107,7 +104,7 @@
         {
             if (knownTypes == null)
             {
-                throw new ArgumentNullException("knownTypes");
+                throw new ArgumentNullException(nameof(knownTypes));
             }
 
             var items = knownTypes.Select(x => XmlKnownTypeBuilder.Create(x));

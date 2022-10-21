@@ -78,10 +78,9 @@
             var type = GetCollectionType<Foo>();
 
             var actual = CreateConverter().ParseXml(type, xml);
-            var expected = new List<Foo>();
-
+            
             Assert.IsInstanceOf(type, actual);
-            Assert.IsTrue(!((IEnumerable<Foo>)actual).Any());
+            Assert.IsEmpty((IEnumerable<Foo>)actual);
         }
 
         [Test]
@@ -91,10 +90,9 @@
             var type = GetCollectionType<Foo>();
 
             var actual = CreateConverter().ParseXml(type, xml);
-            var expected = new List<Foo>();
-
+            
             Assert.IsInstanceOf(type, actual);
-            Assert.IsTrue(!((IEnumerable<Foo>)actual).Any());
+            Assert.IsEmpty((IEnumerable<Foo>)actual);
         }
 
         [Test]
@@ -185,18 +183,16 @@
             });
 
             var actual = CreateConverter().ToXml(value.GetType(), value);
-            var expected = string.Format(
-@"<xml>
+            var expected = $@"<xml>
   <foo>
     <id>1</id>
     <name>foo</name>
   </foo>
-  <foo xsi:type=""{0}"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <foo xsi:type=""{typeof(FooBar)}"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
     <id>2</id>
     <name>foo-bar</name>
   </foo>
-</xml>", 
-        typeof(FooBar));
+</xml>";
 
             Assert.That(actual, IsXml.Equals(expected).WithIgnore(XmlComparisonType.NamespacePrefix));
         }
@@ -204,19 +200,17 @@
         [Test]
         public void ReadCollectionWithDifferentItemTypeTest()
         {
-            var xml = string.Format(
-@"<xml xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+            var xml = $@"<xml xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
   <foo>
     <id>1</id>
     <name>foo</name>
   </foo>
-  <foo xsi:type=""{0}"">
+  <foo xsi:type=""{typeof(FooBar)}"">
     <description>Africa unite!</description>
     <id>2</id>
     <name>foo-bar</name>
   </foo>
-</xml>", 
-        typeof(FooBar));
+</xml>";
 
             var type = GetCollectionType<Foo>();
 

@@ -6,15 +6,10 @@
     {
         public XmlMemberBuilder(Type valueType)
         {
-            if (valueType == null)
-            {
-                throw new ArgumentNullException(nameof(valueType));
-            }
-
-            this.ValueType = valueType;
+            this.ValueType = valueType ?? throw new ArgumentNullException(nameof(valueType));
         }
 
-        public Type ValueType { get; private set; }
+        public Type ValueType { get; }
 
         public XmlName Name { get; set; }
 

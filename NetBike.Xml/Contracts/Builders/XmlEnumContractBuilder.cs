@@ -1,7 +1,6 @@
 ﻿namespace NetBike.Xml.Contracts.Builders
 {
     using System;
-    using System.Collections.Generic;
 
     public class XmlEnumContractBuilder : XmlContractBuilder
     {
@@ -12,7 +11,7 @@
         {
             if (!valueType.IsEnum)
             {
-                throw new ArgumentException("Contract type must be Enum.", "valueType");
+                throw new ArgumentException("Contract type must be Enum.", nameof(valueType));
             }
         }
 
@@ -22,7 +21,7 @@
         {
             if (contract == null)
             {
-                throw new ArgumentNullException("contract");
+                throw new ArgumentNullException(nameof(contract));
             }
 
             return new XmlEnumContractBuilder(contract.ValueType)
@@ -37,7 +36,7 @@
             return new XmlEnumContract(
                 this.ValueType,
                 this.Name,
-                this.Items != null ? this.Items : EmptyItems);
+                this.Items ?? EmptyItems);
         }
 
         public override XmlContract BuildContract()

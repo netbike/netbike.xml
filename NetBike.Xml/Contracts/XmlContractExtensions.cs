@@ -11,9 +11,7 @@
                 throw new ArgumentNullException(nameof(contract));
             }
 
-            var objectContract = contract as XmlObjectContract;
-
-            if (objectContract == null)
+            if (!(contract is XmlObjectContract objectContract))
             {
                 throw new XmlSerializationException($"Contract \"{contract.ValueType}\" must be object contract.");
             }
@@ -28,9 +26,7 @@
                 throw new ArgumentNullException(nameof(contract));
             }
 
-            var enumContract = contract as XmlEnumContract;
-
-            if (enumContract == null)
+            if (!(contract is XmlEnumContract enumContract))
             {
                 throw new XmlSerializationException($"Contract \"{contract.ValueType}\" must be enum contract.");
             }

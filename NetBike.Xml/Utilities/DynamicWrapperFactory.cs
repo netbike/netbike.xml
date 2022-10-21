@@ -6,7 +6,7 @@
 
     internal static class DynamicWrapperFactory
     {
-        private static readonly Type CreaterType = typeof(Func<object>);
+        private static readonly Type CreatorType = typeof(Func<object>);
         private static readonly Type GetterType = typeof(Func<object, object>);
         private static readonly Type SetterType = typeof(Action<object, object>);
         private static readonly Module Module = typeof(DynamicWrapperFactory).Module;
@@ -36,7 +36,7 @@
 
                 if (constructor == null)
                 {
-                    throw new ArgumentException("Type \"{0}\" hasn't default constructor.", "valueType");
+                    throw new ArgumentException("Type \"{0}\" hasn't default constructor.", nameof(valueType));
                 }
 
                 generator.Emit(OpCodes.Newobj, constructor);
@@ -44,7 +44,7 @@
 
             generator.Emit(OpCodes.Ret);
 
-            return (Func<object>)dynamicMethod.CreateDelegate(CreaterType);
+            return (Func<object>)dynamicMethod.CreateDelegate(CreatorType);
         }
 
         public static Func<object, object> CreateGetter(PropertyInfo propertyInfo)

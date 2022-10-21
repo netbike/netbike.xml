@@ -13,12 +13,7 @@
 
         public XmlSerializer(XmlSerializerSettings settings)
         {
-            if (settings == null)
-            {
-                throw new ArgumentNullException(nameof(settings));
-            }
-
-            this.Settings = settings;
+            this.Settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
         public XmlSerializerSettings Settings { get; }

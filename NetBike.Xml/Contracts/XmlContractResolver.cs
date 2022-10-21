@@ -19,13 +19,8 @@
 
         public XmlContractResolver(Func<string, string> nameResolver, bool ignoreSystemAttributes = false)
         {
-            if (nameResolver == null)
-            {
-                throw new ArgumentNullException(nameof(nameResolver));
-            }
-
             this.ignoreSystemAttributes = ignoreSystemAttributes;
-            this.nameResolver = nameResolver;
+            this.nameResolver = nameResolver ?? throw new ArgumentNullException(nameof(nameResolver));
         }
 
         public virtual XmlContract ResolveContract(Type valueType)

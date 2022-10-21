@@ -122,7 +122,7 @@
                     return false;
                 }
 
-                result = new DateTime(year, month, day, hour, minute, 0, DateTimeKind.Utc).AddMinutes(-1 * (int)tzd);
+                result = new DateTime(year, month, day, hour, minute, 0, DateTimeKind.Utc).AddMinutes(-1 * tzd);
                 return true;
             }
 
@@ -147,7 +147,7 @@
                     return false;
                 }
 
-                result = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc).AddMinutes(-1 * (int)tzd);
+                result = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc).AddMinutes(-1 * tzd);
             }
             else
             {
@@ -174,7 +174,7 @@
                     return false;
                 }
 
-                result = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc).AddMinutes(-1 * (int)tzd).AddTicks(ticks);
+                result = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc).AddMinutes(-1 * tzd).AddTicks(ticks);
             }
 
             return true;

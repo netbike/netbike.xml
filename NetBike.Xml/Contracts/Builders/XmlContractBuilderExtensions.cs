@@ -31,7 +31,7 @@
         {
             if (build == null)
             {
-                throw new ArgumentNullException("build");
+                throw new ArgumentNullException(nameof(build));
             }
 
             var property = XmlPropertyBuilder.Create(builder.ValueType, propertyName);
@@ -76,7 +76,7 @@
         {
             if (build == null)
             {
-                throw new ArgumentNullException("build");
+                throw new ArgumentNullException(nameof(build));
             }
 
             var property = XmlPropertyBuilder.Create<T, TProperty>(expression);

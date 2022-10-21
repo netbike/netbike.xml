@@ -24,43 +24,41 @@
         {
             var context = CreateContext(valueType, member, contract, settings);
 
-            using (var input = new StringReader(xmlString))
-            using (var reader = XmlReader.Create(input, context.Settings.GetReaderSettings()))
+            using var input = new StringReader(xmlString);
+            using var reader = XmlReader.Create(input, context.Settings.GetReaderSettings());
+            while (reader.NodeType != XmlNodeType.Element && reader.Read())
             {
-                while (reader.NodeType != XmlNodeType.Element && reader.Read())
-                {
-                }
-
-                if (reader.Name != "xml")
-                {
-                    Assert.Fail("Expected start element \"xml\".");
-                }
-
-                var isAttribute = context.Member.MappingType == XmlMappingType.Attribute;
-
-                if (isAttribute)
-                {
-                    reader.MoveToAttribute(context.Member.Name.LocalName, context.Member.Name.NamespaceUri);
-                }
-
-                var value = converter.ReadXml(reader, context);
-
-                if (isAttribute)
-                {
-                    reader.MoveToElement();
-
-                    if (reader.NodeType != XmlNodeType.Element || reader.Name != "xml")
-                    {
-                        Assert.Fail("Expected element \"xml\".");
-                    }
-                }
-                else if (reader.NodeType != XmlNodeType.None)
-                {
-                    Assert.Fail("Expected end of xml.");
-                }
-
-                return value;
             }
+
+            if (reader.Name != "xml")
+            {
+                Assert.Fail("Expected start element \"xml\".");
+            }
+
+            var isAttribute = context.Member.MappingType == XmlMappingType.Attribute;
+
+            if (isAttribute)
+            {
+                reader.MoveToAttribute(context.Member.Name.LocalName, context.Member.Name.NamespaceUri);
+            }
+
+            var value = converter.ReadXml(reader, context);
+
+            if (isAttribute)
+            {
+                reader.MoveToElement();
+
+                if (reader.NodeType != XmlNodeType.Element || reader.Name != "xml")
+                {
+                    Assert.Fail("Expected element \"xml\".");
+                }
+            }
+            else if (reader.NodeType != XmlNodeType.None)
+            {
+                Assert.Fail("Expected end of xml.");
+            }
+
+            return value;
         }
 
         public static string ToXml(this IXmlConverter converter, Type valueType, object value, XmlMember member = null, XmlContract contract = null, XmlSerializerSettings settings = null)
@@ -95,24 +93,15 @@
 
         private static XmlSerializationContext CreateContext(Type valueType, XmlMember member, XmlContract contract, XmlSerializerSettings settings)
         {
-            if (settings == null)
+            settings ??= new XmlSerializerSettings
             {
-                settings = new XmlSerializerSettings
-                {
-                    OmitXmlDeclaration = true,
-                    ContractResolver = new XmlContractResolver(NamingConventions.CamelCase)
-                };
-            }
+                OmitXmlDeclaration = true,
+                ContractResolver = new XmlContractResolver(NamingConventions.CamelCase)
+            };
 
-            if (contract == null)
-            {
-                contract = settings.ContractResolver.ResolveContract(valueType);
-            }
+            contract ??= settings.ContractResolver.ResolveContract(valueType);
 
-            if (member == null)
-            {
-                member = contract.Root;
-            }
+            member ??= contract.Root;
 
             return new XmlSerializationContext(settings, member, contract);
         }

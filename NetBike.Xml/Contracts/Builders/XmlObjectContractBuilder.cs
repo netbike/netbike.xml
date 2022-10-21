@@ -19,7 +19,7 @@
         {
             if (contract == null)
             {
-                throw new ArgumentNullException("contract");
+                throw new ArgumentNullException(nameof(contract));
             }
 
             return new XmlObjectContractBuilder(contract.ValueType)
@@ -36,9 +36,9 @@
             return new XmlObjectContract(
                 this.ValueType,
                 this.Name ?? this.ValueType.GetShortName(),
-                this.Properties != null ? this.Properties.Build() : null,
+                this.Properties?.Build(),
                 this.TypeHandling,
-                this.Item != null ? this.Item.Build() : null);
+                this.Item?.Build());
         }
 
         public override XmlContract BuildContract()
