@@ -11,7 +11,7 @@ Fast, flexible and high customizable XML serializer for converting between .NET 
 * Built-in support for the Nullable<>, List<>, Dictionary<> and more
 * Supports for base and derived types via IXmlTypeResolver
 * Compatibility with XML attributes of System.Xml.XmlSerializer
-* .NET Standart 2.0
+* .NET Standard 2.0
 
 Install
 -------
