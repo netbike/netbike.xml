@@ -70,9 +70,14 @@
         [Test]
         public void WriteNullWithNullIncludeHandlingTest()
         {
-            var serializer = new XmlSerializer();
-            serializer.Settings.OmitXmlDeclaration = true;
-            serializer.Settings.NullValueHandling = XmlNullValueHandling.Include;
+            var serializer = new XmlSerializer
+            {
+                Settings =
+                {
+                    OmitXmlDeclaration = true,
+                    NullValueHandling = XmlNullValueHandling.Include
+                }
+            };
             var actual = serializer.ToXml(new TestClass());
             var expected = @"<TestClass xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><Value xsi:nil=""true"" /></TestClass>";
             Assert.That(actual, IsXml.Equals(expected));

@@ -11,9 +11,7 @@
 
         public override bool Equals(object obj)
         {
-            var other = obj as Foo;
-
-            if (other == null)
+            if (!(obj is Foo other))
             {
                 return false;
             }

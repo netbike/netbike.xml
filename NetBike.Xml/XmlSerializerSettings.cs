@@ -124,12 +124,7 @@
 
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.indentChars = value;
+                this.indentChars = value ?? throw new ArgumentNullException(nameof(value));
                 this.readerSettings = null;
             }
         }
@@ -138,30 +133,14 @@
         {
             get => this.typeAttributeName;
 
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.typeAttributeName = value;
-            }
+            set => this.typeAttributeName = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public XmlName NullAttributeName
         {
             get => this.nullAttributeName;
 
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.nullAttributeName = value;
-            }
+            set => this.nullAttributeName = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public CultureInfo Culture
@@ -177,12 +156,7 @@
 
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.typeResolver = value;
+                this.typeResolver = value ?? throw new ArgumentNullException(nameof(value));
                 this.typeContextCache.Clear();
             }
         }
@@ -193,12 +167,7 @@
 
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.contractResolver = value;
+                this.contractResolver = value ?? throw new ArgumentNullException(nameof(value));
                 this.typeContextCache.Clear();
             }
         }
@@ -209,12 +178,7 @@
 
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.encoding = value;
+                this.encoding = value ?? throw new ArgumentNullException(nameof(value));
                 this.readerSettings = null;
             }
         }

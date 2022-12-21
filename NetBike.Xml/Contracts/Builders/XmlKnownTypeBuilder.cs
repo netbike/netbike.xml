@@ -19,7 +19,7 @@
         {
             if (knownType == null)
             {
-                throw new ArgumentNullException("knownType");
+                throw new ArgumentNullException(nameof(knownType));
             }
 
             return new XmlKnownTypeBuilder(knownType.ValueType)

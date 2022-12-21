@@ -469,9 +469,7 @@
 
             public override bool Equals(object obj)
             {
-                var other = obj as ClassWithCollectionProperty;
-
-                if (other != null)
+                if (obj is ClassWithCollectionProperty other)
                 {
                     if (Name == other.Name && Numbers.Count == other.Numbers.Count)
                     {

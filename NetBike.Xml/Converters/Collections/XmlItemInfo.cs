@@ -25,7 +25,7 @@
 
             if (this.KnownNameRefs != null)
             {
-                for (int i = 0; i < this.KnownNameRefs.Length; i++)
+                for (var i = 0; i < this.KnownNameRefs.Length; i++)
                 {
                     if (this.KnownNameRefs[i].Match(reader))
                     {

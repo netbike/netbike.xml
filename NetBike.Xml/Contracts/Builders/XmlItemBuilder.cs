@@ -15,7 +15,7 @@
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             return new XmlItemBuilder(item.ValueType)
@@ -32,7 +32,7 @@
                 this.ValueType,
                 this.Name ?? this.ValueType.GetShortName(),
                 this.TypeHandling,
-                this.KnownTypes != null ? this.KnownTypes.Build() : null);
+                this.KnownTypes?.Build());
         }
     }
 }

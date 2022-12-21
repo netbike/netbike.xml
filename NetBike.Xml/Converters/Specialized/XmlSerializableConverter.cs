@@ -9,12 +9,12 @@
     {
         public bool CanRead(Type valueType)
         {
-            return this.IsSerializable(valueType);
+            return IsSerializable(valueType);
         }
 
         public bool CanWrite(Type valueType)
         {
-            return this.IsSerializable(valueType);
+            return IsSerializable(valueType);
         }
 
         public void WriteXml(XmlWriter writer, object value, XmlSerializationContext context)
@@ -30,7 +30,7 @@
             return value;
         }
 
-        private bool IsSerializable(Type valueType)
+        private static bool IsSerializable(Type valueType)
         {
             return valueType.GetInterfaces().Any(x => x == typeof(IXmlSerializable));
         }

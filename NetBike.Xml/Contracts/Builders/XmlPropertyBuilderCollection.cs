@@ -18,29 +18,26 @@
         {
             if (items == null)
             {
-                throw new ArgumentNullException("items");
+                throw new ArgumentNullException(nameof(items));
             }
 
             this.items = new List<XmlPropertyBuilder>(items);
         }
 
-        public int Count
-        {
-            get { return this.items.Count; }
-        }
+        public int Count => this.items.Count;
 
         public void Add(XmlPropertyBuilder item)
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             var index = this.IndexOf(item.PropertyInfo);
 
             if (index != -1)
             {
-                throw new ArgumentException(string.Format("Property \"{0}\" allready registered.", item.PropertyInfo), "item");
+                throw new ArgumentException($"Property \"{item.PropertyInfo}\" already registered.", nameof(item));
             }
 
             this.items.Add(item);
@@ -50,7 +47,7 @@
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             var index = this.IndexOf(item.PropertyInfo);
@@ -102,7 +99,7 @@
         {
             if (properties == null)
             {
-                throw new ArgumentNullException("properties");
+                throw new ArgumentNullException(nameof(properties));
             }
 
             var items = properties.Select(x => XmlPropertyBuilder.Create(x));

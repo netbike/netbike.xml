@@ -10,18 +10,8 @@
 
         public XmlContract(Type valueType, XmlName name)
         {
-            if (valueType == null)
-            {
-                throw new ArgumentNullException(nameof(valueType));
-            }
-
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            this.ValueType = valueType;
-            this.Name = name;
+            this.ValueType = valueType ?? throw new ArgumentNullException(nameof(valueType));
+            this.Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         public Type ValueType { get; }

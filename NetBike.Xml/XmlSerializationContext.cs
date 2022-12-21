@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Xml;
     using NetBike.Xml.Contracts;
-    using NetBike.Xml.Converters;
 
     public sealed class XmlSerializationContext
     {
@@ -18,30 +17,15 @@
 
         public XmlSerializationContext(XmlSerializerSettings settings)
         {
-            if (settings == null)
-            {
-                throw new ArgumentNullException(nameof(settings));
-            }
-
-            this.Settings = settings;
+            this.Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             this.initialState = true;
         }
 
         internal XmlSerializationContext(XmlSerializerSettings settings, XmlMember member, XmlContract contract)
             : this(settings)
         {
-            if (contract == null)
-            {
-                throw new ArgumentNullException(nameof(contract));
-            }
-
-            if (member == null)
-            {
-                throw new ArgumentNullException(nameof(member));
-            }
-
-            this.currentContract = contract;
-            this.currentMember = member;
+            this.currentContract = contract ?? throw new ArgumentNullException(nameof(contract));
+            this.currentMember = member ?? throw new ArgumentNullException(nameof(member));
             this.initialState = false;
         }
 

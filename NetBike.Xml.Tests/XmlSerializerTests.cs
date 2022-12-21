@@ -85,8 +85,13 @@
         [Test]
         public void DeserializeNullTest()
         {
-            var serializer = new XmlSerializer();
-            serializer.Settings.NullValueHandling = XmlNullValueHandling.Include;
+            var serializer = new XmlSerializer
+            {
+                Settings =
+                {
+                    NullValueHandling = XmlNullValueHandling.Include
+                }
+            };
 
             var xml = @"<foo xsi:nil=""true"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" />";
             var actual = serializer.ParseXml<Foo>(xml);
@@ -182,7 +187,7 @@
         }
 
         [Test]
-        public void DeserializeWithUninknownPropertiesTest()
+        public void DeserializeWithUnknownPropertiesTest()
         {
             var xml = @"<foo xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
   <id>1</id>
@@ -247,15 +252,15 @@
             };
 
             var actual = GetSerializer().ToXml<IEnumerable<Foo>>(value);
-            var expected = string.Format(@"
-<ienumerable xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""{0}"">
+            var expected = $@"
+<ienumerable xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""{value.GetType().FullName}"">
   <foo>
     <id>1</id>
   </foo>
   <foo>
     <id>2</id>
 </foo>
-</ienumerable>", value.GetType().FullName);
+</ienumerable>";
 
             Assert.That(actual, IsXml.Equals(expected).WithIgnoreDeclaration());
         }
@@ -402,9 +407,7 @@
 
             public override bool Equals(object obj)
             {
-                var other = obj as SampleClass;
-
-                if (other == null)
+                if (!(obj is SampleClass other))
                 {
                     return false;
                 }

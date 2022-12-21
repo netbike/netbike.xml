@@ -6,12 +6,7 @@
     {
         public XmlContractBuilder(Type valueType)
         {
-            if (valueType == null)
-            {
-                throw new ArgumentNullException("valueType");
-            }
-
-            this.ValueType = valueType;
+            this.ValueType = valueType ?? throw new ArgumentNullException(nameof(valueType));
         }
 
         public Type ValueType { get; private set; }

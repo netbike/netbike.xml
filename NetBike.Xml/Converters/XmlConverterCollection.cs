@@ -45,7 +45,7 @@
 
         private void OnCollectionChanged()
         {
-            CollectionChanged?.Invoke(this, new EventArgs());
+            CollectionChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

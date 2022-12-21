@@ -28,7 +28,6 @@
                 throw new XmlSerializationException($"XML mapping of \"{context.ValueType}\" must be Element.");
             }
 
-            var target = value;
             var contract = context.Contract.ToObjectContract();
 
             foreach (var property in contract.Properties)

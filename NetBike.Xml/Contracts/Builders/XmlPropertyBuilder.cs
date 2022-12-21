@@ -14,7 +14,7 @@
             this.Order = -1;
         }
 
-        public PropertyInfo PropertyInfo { get; private set; }
+        public PropertyInfo PropertyInfo { get; }
 
         public XmlMappingType MappingType { get; set; }
 
