@@ -18,7 +18,9 @@
             [XmlEnum("0")]
             False,
             [XmlEnum("-")]
-            SomethingElse
+            SomethingElse,
+            [XmlEnum(".")]
+            Dot,
         }
 
         [Test]
@@ -106,6 +108,7 @@
                 .SetItem(TestEnum.True, "true")
                 .SetItem(TestEnum.False, "false")
                 .SetItem(TestEnum.SomethingElse, "somethingElse")
+                .SetItem(TestEnum.Dot, "dot")
                 .BuildContract();
 
             XmlContractAssert.AreEqual(expected, actual);
@@ -256,6 +259,7 @@
                 .SetItem(TestEnum.True, "1")
                 .SetItem(TestEnum.False, "0")
                 .SetItem(TestEnum.SomethingElse, "-")
+                .SetItem(TestEnum.Dot, ".")
                 .BuildContract();
 
             XmlContractAssert.AreEqual(expected, actual);
