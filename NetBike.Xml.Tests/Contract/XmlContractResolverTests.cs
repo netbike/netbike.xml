@@ -196,9 +196,10 @@
 
             var expected = new XmlObjectContractBuilder<TestClassWithCollections>()
                 .SetName("testClassWithCollections")
-                .SetProperty(x => x.Array, p => p.SetName("array"))
+                .SetProperty(x => x.Array, p => p.SetName("array").SetOrder(1))
                 .SetProperty(x => x.GenericList, p => p
                     .SetName("Array2")
+                    .SetOrder(2)
                     .SetItem(new XmlName("Item", "http://example.org")))
                 .Build();
 
@@ -286,10 +287,10 @@
 
         public class TestClassWithCollections
         {
-            [XmlArray]
+            [XmlArray(Order = 1)]
             public string[] Array { get; set; }
 
-            [XmlArray(ElementName = "Array2")]
+            [XmlArray(ElementName = "Array2", Order = 2)]
             [XmlArrayItem(ElementName = "Item", Namespace = "http://example.org")]
             public List<int> GenericList { get; set; }
         }

@@ -253,7 +253,7 @@
             else if (attributes.Array != null)
             {
                 var name = propertyName.Create(attributes.Array.ElementName, attributes.Array.Namespace);
-                propertyBuilder.SetName(name).SetNullable(attributes.Array.IsNullable).SetCollection(false);
+                propertyBuilder.SetName(name).SetOrder(attributes.Array.Order).SetNullable(attributes.Array.IsNullable).SetCollection(false);
             }
 
             if (attributes.Default != null)
