@@ -1,7 +1,7 @@
 NetBike.Xml
 ============
 
-[![Build Status](https://cloud.drone.io/api/badges/netbike/netbike.xml/status.svg)](https://cloud.drone.io/netbike/netbike.xml)
+![Build Status](https://github.com/netbike/netbike.xml/actions/workflows/main.yml/badge.svg)
 [![NuGet](https://img.shields.io/nuget/v/NetBike.Xml)](https://www.nuget.org/packages/NetBike.Xml)
 
 Fast, flexible and high customizable XML serializer for converting between .NET objects and XML.
