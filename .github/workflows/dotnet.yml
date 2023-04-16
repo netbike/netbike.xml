@@ -1,0 +1,40 @@
+name: .NET Build with Tests
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x' ]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
+    - name: Publish
+      if: github.ref == 'refs/heads/master'
+      run: |
+        dotnet pack -c Release --no-build --no-restore
+        dotnet nuget push NetBike.Xml/bin/Release/**.nupkg --source "https://nuget.org" --api-key ${{ secrets.NUGET_APIKEY }} --skip-duplicate
+        dotnet nuget push NetBike.Xml.Formatting/bin/Release/**.nupkg --source "https://nuget.org" --api-key ${{ secrets.NUGET_APIKEY }} --skip-duplicate
