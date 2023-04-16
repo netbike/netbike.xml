@@ -8,8 +8,8 @@
     <Copyright>Copyright © NetBike 2015</Copyright>
     <Product>NetBike.Xml.Formatting</Product>
     <Description>Fast, flexible and high customizable XML formatter for Web API.</Description>
-    <AssemblyVersion>0.6.2.0</AssemblyVersion>
-    <Version>0.6.2</Version>
+    <AssemblyVersion>0.7.0.0</AssemblyVersion>
+    <Version>0.7.0</Version>
     <Authors>NetBike</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/netbike/netbike.xml</PackageProjectUrl>
